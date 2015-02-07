@@ -1,13 +1,21 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url, include
+from rest_framework import routers
 from django.contrib import admin
-from django.http import HttpResponseRedirect
+from yata import views
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'beta.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'projects', views.ProjectViewSet)
+router.register(r'companies', views.CompanyViewSet)
+router.register(r'timesheets', views.TimesheetViewSet)
+router.register(r'customers', views.CustomerViewSet)
+router.register(r'hours', views.HourViewSet)
 
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^$', lambda r: HttpResponseRedirect('api/'))
-)
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]
