@@ -1,5 +1,5 @@
 """
-Django settings for yabe project.
+Django settings for beta project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -50,9 +50,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'yabe.urls'
+ROOT_URLCONF = 'beta.urls'
 
-WSGI_APPLICATION = 'yabe.wsgi.application'
+WSGI_APPLICATION = 'beta.wsgi.application'
 
 
 # Database

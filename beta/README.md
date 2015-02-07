@@ -1,6 +1,6 @@
-# YaBE
+# BETA
 
-Yet Another Back-End
+Back-End for Timesheet Application
 
 
 ```
