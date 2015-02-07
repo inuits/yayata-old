@@ -26,14 +26,14 @@ class Company(models.Model):
     ''' The companies that will make invoices '''
     name = models.CharField(max_length=30)
 
-class Timesheet():
+class Timesheet(models.Model):
     month = models.DateField()
     project = models.ForeignKey('Project')
     company = models.ForeignKey('Company')
-    group = models.ForeignKey('Group')
-    user = models.ForeignKey('User')
+    group = models.ForeignKey(Group)
+    user = models.ForeignKey(User)
 
-    class Meta():
+    class Meta:
         permissions = (
             ('view_timesheet', 'View timesheet'),
             ('change_timesheet_company', 'Change the company'),
@@ -41,13 +41,13 @@ class Timesheet():
             ('change_timesheet_group', 'Change the timesheet group'),
         )
 
-class Hour():
-    timesheet = models.ManyToManyField('Timesheet')
+class Hour(models.Model):
+    timesheet = models.ForeignKey('Timesheet')
     description = models.CharField(max_length=80, blank=True)
     hours = models.DecimalField(max_digits=4, decimal_places=2)
     day = models.DateField()
 
-    class Meta():
+    class Meta:
         permissions = (
             ('view_hour', 'View hour'),
         )
