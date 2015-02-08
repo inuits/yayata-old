@@ -1,10 +1,23 @@
-from django.test import TestCase
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 from yata.models import Timesheet, Project, Company, Customer
 from datetime import date
 from django.contrib.auth.models import User
-from rest_framework.test import APITestCase, APIClient
+from rest_framework.test import APITestCase
+from rest_framework import status
+from django.core.urlresolvers import reverse
 
-class TimesheetTestCase(TestCase):
+
+class YataTest(APITestCase):
+    def generate_timesheet(self,name):
+        company = Company.objects.create(name="%s Int" % name.title())
+        customer = Customer.objects.create(short_name=name[0:3].upper(), name="Customer %s" % name.title())
+        project = Project.objects.create(name="Project %s" % name.title(), short_name="P%s" % name[0:2].upper(), customer=customer)
+        user = User.objects.create(username="%s_user" % name)
+        return Timesheet.objects.create(user=user, project=project, month=date(2015,01,01), company=company)
+
+
+class TimesheetTestCase(YataTest):
     def setUp(self):
         company = Company.objects.create(name="Inuits")
         customer = Customer.objects.create(short_name="ESQ", name="Esquimaux")
@@ -12,30 +25,50 @@ class TimesheetTestCase(TestCase):
         user = User.objects.create(username="tux")
         Timesheet.objects.create(user=user, project=project, month=date(2015,01,01), company=company)
 
-    def test_timesheet_month_first_day(self):
-        """Check that when changing the date it is set to the 1st of the month """
+    def test_timesheet_month_first_day_january(self):
+        '''Check that when changing the date it is set to the 1st of the month'''
         ts = Timesheet.objects.get(id=1)
         ts.month = date(2015,01,02)
         ts.save()
-        ts = Timesheet.objects.get(id=1)
         self.assertEqual(ts.month, date(2015,01,01))
+
+    def test_timesheet_month_first_day_may(self):
+        '''This time the date should not be changed'''
+        ts = Timesheet.objects.get(id=1)
         ts.month = date(2015,05,01)
         ts.save()
-        ts = Timesheet.objects.get(id=1)
         self.assertEqual(ts.month, date(2015,05,01))
+
+    def test_timesheet_month_first_day_no_change_to_date(self):
+        '''Another test with february'''
+        ts = Timesheet.objects.get(id=1)
         ts.month = date(2015,02,06)
         ts.save()
-        ts = Timesheet.objects.get(id=1)
         self.assertEqual(ts.month, date(2015,02,01))
 
-class ACLTimesheetTestCase(APITestCase):
+class ACLTimesheetTestCase(YataTest):
     def setUp(self):
-        self.zeus = User.objects.create(username='zeus')
-        self.appollo = User.objects.create(username='appollo')
-        self.client = APIClient()
+        self.ts1 = self.generate_timesheet('zeus')
+        self.ts2 = self.generate_timesheet('appollo')
 
-    def test_timesheet_acl(self):
-        self.client.force_authenticate(user=self.zeus)
-        self.assertEqual(1, 1)
+        content_type = ContentType.objects.get_for_model(Timesheet)
+        self.view_all_acl_permission = Permission.objects.get(content_type=content_type, codename='view_all_timesheets')
 
+        self.ts1.user.user_permissions.add(self.view_all_acl_permission)
+
+    def test_all_acl_permission(self):
+        '''test that ts1 user see both timesheets'''
+        self.client.force_authenticate(user=self.ts1.user)
+        url = reverse('timesheet-list')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_no_all_acl_permission(self):
+        '''test that ts2 user see only his own timesheet'''
+        self.client.force_authenticate(user=self.ts2.user)
+        url = reverse('timesheet-list')
+        response = self.client.get(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 1)
 
