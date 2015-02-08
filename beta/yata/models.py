@@ -41,6 +41,14 @@ class Timesheet(models.Model):
             ('change_timesheet_group', 'Change the timesheet group'),
         )
 
+    def clean(self):
+        self.month = self.month.replace(day = 1)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super(Timesheet, self).save(*args, **kwargs)
+
+
 class Hour(models.Model):
     timesheet = models.ForeignKey('Timesheet')
     description = models.CharField(max_length=80, blank=True)
