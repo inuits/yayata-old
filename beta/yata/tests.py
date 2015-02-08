@@ -2,6 +2,7 @@ from django.test import TestCase
 from yata.models import Timesheet, Project, Company, Customer
 from datetime import date
 from django.contrib.auth.models import User
+from rest_framework.test import APITestCase, APIClient
 
 class TimesheetTestCase(TestCase):
     def setUp(self):
@@ -27,5 +28,14 @@ class TimesheetTestCase(TestCase):
         ts = Timesheet.objects.get(id=1)
         self.assertEqual(ts.month, date(2015,02,01))
 
+class ACLTimesheetTestCase(APITestCase):
+    def setUp(self):
+        self.zeus = User.objects.create(username='zeus')
+        self.appollo = User.objects.create(username='appollo')
+        self.client = APIClient()
+
+    def test_timesheet_acl(self):
+        self.client.force_authenticate(user=self.zeus)
+        self.assertEqual(1, 1)
 
 
