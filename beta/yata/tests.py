@@ -48,8 +48,11 @@ class TimesheetTestCase(YataTest):
 
 class ACLTimesheetTestCase(YataTest):
     def setUp(self):
+        self.total_timesheet = 4
         self.ts1 = self.generate_timesheet('zeus')
         self.ts2 = self.generate_timesheet('appollo')
+        self.ts3 = self.generate_timesheet('artemis')
+        self.ts4 = self.generate_timesheet('ares')
 
         content_type = ContentType.objects.get_for_model(Timesheet)
         self.view_all_acl_permission = Permission.objects.get(content_type=content_type, codename='view_all_timesheets')
@@ -62,7 +65,7 @@ class ACLTimesheetTestCase(YataTest):
         url = reverse('timesheet-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data), self.total_timesheet)
 
     def test_no_all_acl_permission(self):
         '''test that ts2 user see only his own timesheet'''
