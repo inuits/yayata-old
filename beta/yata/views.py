@@ -40,7 +40,13 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     serializer_class = TimesheetSerializer
 
     def get_queryset(self):
-        queryset = Timesheet.objects.all()
+        user = self.request.user
+        if user.has_perm('yata.view_all_timesheets'):
+            print 'bar'
+            queryset = Timesheet.objects.all()
+        else:
+            print 'foo'
+            queryset = Timesheet.objects.filter(user=user.id)
         return queryset
 
 
