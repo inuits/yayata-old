@@ -18,6 +18,14 @@ class TimesheetTestCase(TestCase):
         ts.save()
         ts = Timesheet.objects.get(id=1)
         self.assertEqual(ts.month, date(2015,01,01))
+        ts.month = date(2015,05,01)
+        ts.save()
+        ts = Timesheet.objects.get(id=1)
+        self.assertEqual(ts.month, date(2015,05,01))
+        ts.month = date(2015,02,06)
+        ts.save()
+        ts = Timesheet.objects.get(id=1)
+        self.assertEqual(ts.month, date(2015,02,01))
 
 
 
