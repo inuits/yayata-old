@@ -35,7 +35,7 @@ class Timesheet(models.Model):
 
     class Meta:
         permissions = (
-            ('view_timesheet', 'View timesheet'),
+            ('view_all_timesheets', 'View all the timesheets'),
             ('change_timesheet_company', 'Change the company'),
             ('change_timesheet_user', 'Change the timesheet user'),
             ('change_timesheet_group', 'Change the timesheet group'),
