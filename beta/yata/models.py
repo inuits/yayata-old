@@ -1,6 +1,7 @@
 from django.db import models
 from django_countries.fields import CountryField
 from django.contrib.auth.models import Group, User
+from django.core.exceptions import ValidationError
 
 class Customer(models.Model):
     short_name = models.CharField(max_length=5)
@@ -49,9 +50,11 @@ class Timesheet(models.Model):
 
     def clean(self):
         self.month = self.month.replace(day = 1)
+        if self.user == self.group == None:
+            raise ValidationError('A user or a group has to be chosed for this timesheet')
 
     def save(self, *args, **kwargs):
-        self.clean()
+        self.full_clean()
         super(Timesheet, self).save(*args, **kwargs)
 
 
