@@ -8,7 +8,7 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'projects', views.ProjectViewSet)
 router.register(r'companies', views.CompanyViewSet)
-router.register(r'timesheets', views.TimesheetViewSet)
+router.register(r'timesheets', views.TimesheetViewSet, base_name='timesheet')
 router.register(r'customers', views.CustomerViewSet)
 router.register(r'hours', views.HourViewSet)
 

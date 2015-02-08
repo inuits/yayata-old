@@ -37,8 +37,12 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows timesheets to be viewed or edited.
     """
-    queryset = Timesheet.objects.all()
     serializer_class = TimesheetSerializer
+
+    def get_queryset(self):
+        queryset = Timesheet.objects.all()
+        return queryset
+
 
 class HourViewSet(viewsets.ModelViewSet):
     """

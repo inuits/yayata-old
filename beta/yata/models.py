@@ -30,8 +30,8 @@ class Timesheet(models.Model):
     month = models.DateField()
     project = models.ForeignKey('Project')
     company = models.ForeignKey('Company')
-    group = models.ForeignKey(Group)
-    user = models.ForeignKey(User)
+    group = models.ForeignKey(Group,blank=True,null=True)
+    user = models.ForeignKey(User,blank=True,null=True)
 
     class Meta:
         permissions = (
