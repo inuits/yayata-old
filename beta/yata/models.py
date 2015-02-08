@@ -20,11 +20,14 @@ class Project(models.Model):
     #groups = models.ManyToManyField(Group, blank=True)
 
     def __unicode__(self):
-        return self.name
+        return "%s (%s)" % (self.name, self.customer.name)
 
 class Company(models.Model):
     ''' The companies that will make invoices '''
     name = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.name
 
 class Timesheet(models.Model):
     month = models.DateField()
@@ -32,6 +35,9 @@ class Timesheet(models.Model):
     company = models.ForeignKey('Company')
     group = models.ForeignKey(Group,blank=True,null=True)
     user = models.ForeignKey(User,blank=True,null=True)
+
+    def __unicode__(self):
+        return "%s - %s - %s" % (self.month, unicode(self.project), unicode(self.user))
 
     class Meta:
         permissions = (
