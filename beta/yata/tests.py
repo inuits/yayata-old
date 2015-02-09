@@ -2,7 +2,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from yata.models import Timesheet, Project, Company, Customer
 from datetime import date
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.core.urlresolvers import reverse
@@ -53,6 +53,8 @@ class ACLTimesheetTestCase(YataTest):
         self.ts2 = self.generate_timesheet('appollo')
         self.ts3 = self.generate_timesheet('artemis')
         self.ts4 = self.generate_timesheet('ares')
+        self.ts4.group = Group.objects.create(name='ares')
+        self.ts4.user = None
 
         content_type = ContentType.objects.get_for_model(Timesheet)
         self.view_all_acl_permission = Permission.objects.get(content_type=content_type, codename='view_all_timesheets')
