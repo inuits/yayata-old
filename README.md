@@ -9,5 +9,9 @@ used internally at Inuits by consultants to report their time.
 * BETA: Back-End for Timesheet Application (django, api-based)
 * FETA: Front-End for Timesheet Application (angularjs)
 
+## Current status
+
+Not working ; very early stage
+
 ![Screenshot](misc/screenshot.png?raw=true "Screenshot of YAYATA frontend")
 
