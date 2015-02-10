@@ -5,6 +5,7 @@ function TimesheetListCtrl($scope, Timesheet){
             }
             );
 }
+
 function TimesheetViewCtrl($scope, $routeParams, Timesheet){
     var timesheet = Timesheet.query({'timesheetId': $routeParams.timesheetId},
         function(){

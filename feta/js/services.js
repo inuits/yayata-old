@@ -4,5 +4,5 @@ factory('timesheets', function($resource){
         query: {method:'GET', params:{timesheetId:''}, isArray:false},
         get: {method:'GET', params:{timesheetId:''}, isArray:false}
     });
-}).
+});
 

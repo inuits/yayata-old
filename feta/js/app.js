@@ -1,4 +1,4 @@
- var KanBanModule = angular.module('Yata', ['YataServices', 'YataControllers']).
+var KanBanModule = angular.module('Yata', ['YataServices', 'YataControllers']).
 config(['$routeProvider', function($routeProvider) {
      $routeProvider.
          when('/timesheets', {templateUrl: YataUrls['template_timesheet_list'], controller: TimesheetListCtrl}).
