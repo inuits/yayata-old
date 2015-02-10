@@ -1,8 +1,14 @@
 angular.module('YataServices', ['ngResource']).
-factory('timesheets', function($resource){
+factory('Project', function($resource){
+    return $resource(BetaApiUrl + 'projects/:projectId', {}, {
+        query: {method:'GET', params:{projectId:''}, isArray:true},
+        get: {method:'GET', params:{projectId:''}, isArray:true}
+    });
+}).
+factory('Timesheet', function($resource){
     return $resource(BetaApiUrl + 'timesheets/:timesheetId', {}, {
-        query: {method:'GET', params:{timesheetId:''}, isArray:false},
-        get: {method:'GET', params:{timesheetId:''}, isArray:false}
+        query: {method:'GET', params:{timesheetId:''}, isArray:true},
+        get: {method:'GET', params:{timesheetId:''}, isArray:true}
     });
 });
 
