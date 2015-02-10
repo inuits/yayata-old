@@ -13,5 +13,8 @@ used internally at Inuits by consultants to report their time.
 
 Not working ; very early stage
 
+
+## Screenshot
+
 ![Screenshot](misc/screenshot.png?raw=true "Screenshot of YAYATA frontend")
 
