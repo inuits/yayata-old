@@ -1,7 +1,7 @@
 function TimesheetListCtrl($scope, Timesheet){
     var timesheet = Timesheet.query({},
         function(){
-            $scope.timesheets = timesheets;
+            $scope.timesheets = timesheet;
         }
     );
 }
