@@ -5,11 +5,11 @@
     <fieldset>
         <div class="pure-control-group">
             <label for="name">Month</label>
-            <select>
-                <option data-ng-repeat='m in month' value="{{m}}">{{month[m]}}</option>
+            <select name="month">
+                <option data-ng-repeat='(i, m) in month' ng-selected="i == thismonth" value="{{i}}">{{m}}</option>
             </select>
-            <select>
-                <option value="0">Select a customer</option>
+            <select name="year">
+                <option data-ng-repeat="y in years" ng-selected="y == currentyear" value="{{y}}">{{y}}</option>
             </select>
         </div>
 
