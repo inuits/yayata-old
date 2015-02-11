@@ -1,0 +1,40 @@
+<div class="header">
+    <h1>Timesheets</h1>
+</div>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">Month</label>
+            <select>
+                <option data-ng-repeat='m in month' value="{{m}}">{{month[m]}}</option>
+            </select>
+            <select>
+                <option value="0">Select a customer</option>
+            </select>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="password">Customer</label>
+            <select>
+                <option value="0">Select a customer</option>
+            </select>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="email">Project</label>
+            <select>
+                <option value="0">Select a project</option>
+            </select>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="foo">Note</label>
+            <input id="foo" type="text" placeholder="Enter something here...">
+        </div>
+
+        <div class="pure-controls">
+
+            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+        </div>
+    </fieldset>
+</form>
