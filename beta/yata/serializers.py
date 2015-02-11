@@ -15,6 +15,7 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class CustomerSerializer(serializers.ModelSerializer):
+    country =  serializers.CharField()
     class Meta:
         model = Customer
         fields = ('id', 'short_name', 'name', 'country')
