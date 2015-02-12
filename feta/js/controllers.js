@@ -18,8 +18,15 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet){
         }
     );
 
+    $scope.fields = ['project', 'company', 'month']
+
     $scope.styles = {};
-    $scope.styles['project'] = "";
+    
+    var resetStyles = function(){
+        for (i = 0; i < $scope.fields.length; i++) { 
+            $scope.styles[$scope.fields[i]] = "";
+        }
+    }
 
     $scope.errors = {};
 
@@ -28,8 +35,11 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet){
     },
         function(data){
             $scope.errors=data.data;
-            if ('project' in data.data){
-                $scope.styles['project'] = {"color":"red"};
+            resetStyles();
+            for (i = 0; i < $scope.fields.length; i++) {
+            if ($scope.fields[i] in data.data){
+                $scope.styles[$scope.fields[i]] = {"color":"red"};
+            }
             }
         }
     )};
