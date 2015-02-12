@@ -11,6 +11,12 @@ factory('Project', function($resource){
         get: {method:'GET', params:{projectId:''}, isArray:true}
     });
 }).
+factory('Company', function($resource){
+    return $resource(BetaApiUrl + 'customers/:companyId', {}, {
+        query: {method:'GET', params:{companyId:''}, isArray:true},
+        get: {method:'GET', params:{companyId:''}, isArray:true}
+    });
+}).
 factory('Customer', function($resource){
     return $resource(BetaApiUrl + 'customers/:customerId', {}, {
         query: {method:'GET', params:{customerId:''}, isArray:true},

@@ -6,7 +6,7 @@ function TimesheetListCtrl($scope, Timesheet){
     );
 }
 
-function TimesheetNewCtrl($scope, Customer, Project, Timesheet){
+function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     var project = Project.query({},
         function(){
             $scope.projects = project;
@@ -15,6 +15,11 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet){
     var customer = Customer.query({},
         function(){
             $scope.customers = customer;
+        }
+    );
+    var company = Company.query({},
+        function(){
+            $scope.companies = company;
         }
     );
 

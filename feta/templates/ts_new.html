@@ -27,6 +27,13 @@
             </select>
         </div>
 
+        <div class="pure-control-group">
+            <label data-ng-style='styles["company"]' for="email">Company</label>
+            <select ng-model="timesheet.company">
+                <option data-ng-repeat="c in companies" value="{{c.id}}">{{c.name}}</option>
+            </select>
+        </div>
+
         <div class="pure-controls">
 
             <a type="submit" class="pure-button pure-button-primary" data-ng-click="create()">Submit</a>
