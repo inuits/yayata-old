@@ -20,7 +20,8 @@ factory('Customer', function($resource){
 factory('Timesheet', function($resource){
     return $resource(BetaApiUrl + 'timesheets/:timesheetId', {}, {
         query: {method:'GET', params:{timesheetId:''}, isArray:true},
-        get: {method:'GET', params:{timesheetId:''}, isArray:true}
+        get: {method:'GET', params:{timesheetId:''}, isArray:true},
+        create: {method:'POST', isArray:false}
     });
 });
 

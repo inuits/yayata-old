@@ -1,5 +1,7 @@
 var KanBanModule = angular.module('Yata', ['YataServices','ngRoute']).
-config(['$routeProvider', function($routeProvider) {
+config(['$routeProvider', '$resourceProvider', function($routeProvider, $resourceProvider) {
+     $resourceProvider.defaults.stripTrailingSlashes = false; 
+
      $routeProvider.
          when('/timesheets', {templateUrl: yataUrls['template_timesheet_list'], controller: TimesheetListCtrl}).
          when('/timesheet/new', {templateUrl: yataUrls['template_timesheet_new'], controller: TimesheetNewCtrl}).

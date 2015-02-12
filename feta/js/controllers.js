@@ -6,7 +6,7 @@ function TimesheetListCtrl($scope, Timesheet){
     );
 }
 
-function TimesheetNewCtrl($scope, Customer, Project){
+function TimesheetNewCtrl($scope, Customer, Project, Timesheet){
     var project = Project.query({},
         function(){
             $scope.projects = project;
@@ -17,6 +17,22 @@ function TimesheetNewCtrl($scope, Customer, Project){
             $scope.customers = customer;
         }
     );
+
+    $scope.styles = {};
+    $scope.styles['project'] = "";
+
+    $scope.errors = {};
+
+    $scope.create = function(){Timesheet.create($scope.timesheet).$promise.then(function(data){
+        console.log(data);
+    },
+        function(data){
+            $scope.errors=data.data;
+            if ('project' in data.data){
+                $scope.styles['project'] = {"color":"red"};
+            }
+        }
+    )};
 
     var month = {};
     month[0] = "January";

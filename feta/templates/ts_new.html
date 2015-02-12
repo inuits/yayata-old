@@ -5,10 +5,10 @@
     <fieldset>
         <div class="pure-control-group">
             <label for="name">Month</label>
-            <select name="month">
+            <select data-ng-model="timesheet.month">
                 <option data-ng-repeat='(i, m) in month' ng-selected="i == thismonth" value="{{i}}">{{m}}</option>
             </select>
-            <select name="year">
+            <select data-ng-model="timesheet.year">
                 <option data-ng-repeat="y in years" ng-selected="y == currentyear" value="{{y}}">{{y}}</option>
             </select>
         </div>
@@ -21,21 +21,15 @@
         </div>
 
         <div class="pure-control-group">
-            <label for="email">Project</label>
-            <select ng-model="project">
+            <label data-ng-style='styles["project"]' for="email">Project</label>
+            <select ng-model="timesheet.project">
                 <option data-ng-repeat="p in projects|filter:customer" value="{{p.id}}">{{p.name}}</option>
             </select>
         </div>
 
-        <div class="pure-control-group">
-            <label for="foo">Note</label>
-            <input id="foo" type="text" placeholder="Enter something here...">
-        </div>
-        {{customer.id}}{{project}}
-
         <div class="pure-controls">
 
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+            <a type="submit" class="pure-button pure-button-primary" data-ng-click="create()">Submit</a>
         </div>
     </fieldset>
 </form>
