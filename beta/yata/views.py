@@ -1,10 +1,17 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
 
 
+
+@api_view(['GET'])
+def me(request):
+    serializer = UserSerializer(request.user,context={'request': request})
+    return Response(serializer.data)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

@@ -40,8 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_countries',
     'rest_framework',
-    'provider',
-    'provider.oauth2',
+    'rest_framework.authtoken',
     'corsheaders',
     'yata',
 )
@@ -88,9 +87,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
-        )
+#AUTHENTICATION_BACKENDS = (
+#        'django.contrib.auth.backends.ModelBackend',
+#        )
 
 ANONYMOUS_USER_ID = -1
 
@@ -114,6 +113,8 @@ YATA_VERSION = '0-dev'
 
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework.authentication.OAuth2Authentication',
+            'rest_framework.authentication.TokenAuthentication',
             )
         }
+
+OAUTH_RESPONSE_TYPE_CHOICES = "token"

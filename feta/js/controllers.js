@@ -6,6 +6,7 @@ function TimesheetListCtrl($scope, Timesheet){
     );
 }
 
+
 function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     var project = Project.query({},
         function(){
@@ -26,7 +27,7 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     $scope.fields = ['project', 'company', 'month']
 
     $scope.styles = {};
-    
+
     var resetStyles = function(){
         for (i = 0; i < $scope.fields.length; i++) { 
             $scope.styles[$scope.fields[i]] = "";

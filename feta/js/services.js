@@ -1,8 +1,16 @@
 angular.module('YataServices', ['ngResource']).
-factory('Project', function($resource){
-    return $resource(BetaApiUrl + 'projects/:projectId', {}, {
-        query: {method:'GET', params:{projectId:''}, isArray:true},
-        get: {method:'GET', params:{projectId:''}, isArray:true}
+factory('api', function ($http, $cookies) {
+    return {
+        init: function (token) {
+            token = token || $cookies.token;
+            console.debug(token)
+            if (token) {$http.defaults.headers.common['Authorization'] = "Token " + token;}
+        }
+    };
+}).
+factory('Login', function($resource){
+    return $resource(BetaApiUrl + 'api-token-auth/', {}, {
+        login: {method:'POST'}
     });
 }).
 factory('Project', function($resource){
