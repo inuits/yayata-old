@@ -1,5 +1,8 @@
-var KanBanModule = angular.module('Yata', ['YataServices','ngRoute', 'oauth']).
-config(['$routeProvider', '$resourceProvider', function($routeProvider, $resourceProvider) {
+var KanBanModule = angular.module('Yata', ['YataServices','ngRoute', 'oauth'])
+.config(function($locationProvider) {
+      $locationProvider.html5Mode(true).hashPrefix('!');
+})
+.config(['$routeProvider', '$resourceProvider', function($routeProvider, $resourceProvider) {
      $resourceProvider.defaults.stripTrailingSlashes = false; 
 
      $routeProvider.
