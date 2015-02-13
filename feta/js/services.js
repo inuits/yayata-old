@@ -1,10 +1,25 @@
-angular.module('YataServices', ['ngResource']).
+angular.module('YataServices', ['ngResource', 'ngSanitize']).
 factory('api', function ($http, $cookies) {
     return {
         init: function (token) {
             token = token || $cookies.token;
             if (token) {$http.defaults.headers.common['Authorization'] = "Token " + token;}
+            else if ($http.defaults.headers.common['Authorization']){delete($http.defaults.headers.common['Authorization'])}
         }
+    }
+}).
+factory('httpInterceptor', function ($q, $window, $location, $cookieStore) {
+    return {
+//      'request': function(config) {
+//        return config;
+ //     },
+     'responseError': function(response) {
+            if (response.status === 401) {
+                $cookieStore.remove('token');
+                $location.url('/login');
+            }
+            return $q.reject(response);
+      }
     };
 }).
 factory('Login', function($resource){

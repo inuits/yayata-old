@@ -8,6 +8,7 @@
         <script src="js/angular-resource.min.js"></script>
         <script src="js/angular-route.min.js"></script>
         <script src="js/angular-cookies.min.js"></script>
+        <script src="js/angular-sanitize.min.js"></script>
         <script src="settings.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/services.js"></script>
@@ -20,13 +21,10 @@
     <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <a href="#" class="pure-menu-heading">YAYATA</a>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">These days</a></li>
-            <li><a href="#">This month</a></li>
-            <li><a href="#">Archives</a></li>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/logout">logout</a></li>
         </ul>
     </div>
-    <div data-ng-include="'login.html'"></div>
     <div class="content" data-ng-view></div>
     </body>
 </html>

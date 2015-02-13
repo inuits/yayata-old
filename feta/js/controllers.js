@@ -6,6 +6,22 @@ function TimesheetListCtrl($scope, Timesheet){
     );
 }
 
+function LogoutCtrl($scope, $location, api, $cookieStore) {
+    $cookieStore.remove('token');
+    api.init();
+    $location.path('/login');
+};
+
+
+function LoginCtrl($scope, Login, api, $cookies,$location) {
+    $scope.login = function(){
+        login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
+            api.init(data['token']);
+            $cookies['token']=data['token'];
+            $location.path('/');
+        })
+    };
+};
 
 function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     var project = Project.query({},

@@ -1,22 +1,16 @@
-var KanBanModule = angular.module('Yata', ['YataServices','ngRoute','ngCookies'])
-.config(['$routeProvider', '$resourceProvider', function($routeProvider, $resourceProvider) {
+var KanBanModule = angular.module('Yata', ['YataServices', ,'ngRoute','ngCookies','ngSanitize'])
+.config(['$routeProvider', '$resourceProvider', '$httpProvider', function($routeProvider, $resourceProvider,$httpProvider) {
      $resourceProvider.defaults.stripTrailingSlashes = false;
+       $httpProvider.interceptors.push('httpInterceptor');
 
      $routeProvider.
-         when('/timesheet/new', {templateUrl: yataUrls['template_timesheet_new'], controller: TimesheetNewCtrl}).
-         when('/timesheet/:Id', {templateUrl: yataUrls['template_timesheet_view'], controller: TimesheetViewCtrl}).
-         when('/', {templateUrl: yataUrls['template_timesheet_list'], controller: TimesheetListCtrl})
-         .otherwise({ redirectTo: '/' });
+         when('/timesheet/new', {templateUrl: yataUrls['timesheet_new'], controller: TimesheetNewCtrl}).
+         when('/timesheet/:Id', {templateUrl: yataUrls['timesheet_view'], controller: TimesheetViewCtrl}).
+         when('/login', {templateUrl: yataUrls['login_view'], controller: LoginCtrl}).
+         when('/logout', {templateUrl: yataUrls['logout_view'], controller: LogoutCtrl}).
+         when('/timesheets', {templateUrl: yataUrls['timesheet_list'], controller: TimesheetListCtrl})
+         .otherwise({ redirectTo: '/timesheets' });
  }])
-.controller('LoginCtrl', function($rootScope, $scope, Login, api, $cookies) {
-    $scope.login = function(){
-        login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
-        api.init(data['token']);
-            $cookies['token']=data['token'];
-        })
-    };
-    }
-)
 .run(function (api) {
       api.init();
 });
