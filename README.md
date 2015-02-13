@@ -6,8 +6,8 @@ used internally at Inuits by consultants to report their time.
 
 ## Projects
 
-* BETA: Back-End for Timesheet Application (django, api-based, oauth2 server)
-* FETA: Front-End for Timesheet Application (angularjs, oauth2 consumer)
+* BETA: Back-End for Timesheet Application (django, api-based)
+* FETA: Front-End for Timesheet Application (angularjs)
 
 ## Current status
 
