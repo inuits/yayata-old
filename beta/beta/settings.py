@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_countries',
     'rest_framework',
+    'provider',
+    'provider.oauth2',
     'corsheaders',
     'yata',
 )
@@ -109,3 +111,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 YATA_VERSION = '0-dev'
+
+REST_FRAMEWORK = {
+        'DEFAULT_AUTHENTICATION_CLASSES': (
+            'rest_framework.authentication.OAuth2Authentication',
+            )
+        }

@@ -17,5 +17,7 @@ router.register(r'hours', views.HourViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url('^accounts/login/$', 'django.contrib.auth.views.login'),
+    url(r'^oauth/', include('provider.oauth2.urls', namespace = 'oauth2')),
 ]

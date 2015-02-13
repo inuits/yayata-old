@@ -4,9 +4,11 @@
         <title>YAYATA</title>
         <link rel="stylesheet" href="css/pure.css" />
         <link rel="stylesheet" href="css/app.css" />
-        <script src="js/angular.min.js"></script>
+        <script src="js/angular.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src="js/angular-route.min.js"></script>
+        <script src="js/oauth-ng.js"></script>
+        <script src="js/ngStorage.js"></script>
         <script src="settings.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/services.js"></script>
@@ -14,6 +16,8 @@
         <script src="js/app.js"></script>
     </head>
     <body data-ng-app="Yata">
+    <oauth site="http://127.0.0.1:8000" client-id="ed7efe5ffee4c613f9f6" redirect-uri="http://127.0.0.1:8080/" profile-uri="" scope="read+write" template="test.html">
+    </oauth>
     <div class="pure-menu pure-menu-open pure-menu-horizontal">
         <a href="#" class="pure-menu-heading">YAYATA</a>
         <ul>

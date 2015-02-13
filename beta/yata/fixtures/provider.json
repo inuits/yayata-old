@@ -1,0 +1,1 @@
+[{"fields": {"name": "FETA - Dev", "url": "http://127.0.0.1:8080/", "client_type": 1, "redirect_uri": "http://127.0.0.1:8080/", "user": null, "client_id": "ed7efe5ffee4c613f9f6", "client_secret": "f1cafaaa25290e8dbe43eb2e22b0ed23c62c2d99"}, "model": "oauth2.client", "pk": 1}]
