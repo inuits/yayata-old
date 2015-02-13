@@ -3,7 +3,6 @@ factory('api', function ($http, $cookies) {
     return {
         init: function (token) {
             token = token || $cookies.token;
-            console.debug(token)
             if (token) {$http.defaults.headers.common['Authorization'] = "Token " + token;}
         }
     };

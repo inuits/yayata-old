@@ -10,7 +10,6 @@ var KanBanModule = angular.module('Yata', ['YataServices','ngRoute','ngCookies']
  }])
 .controller('LoginCtrl', function($rootScope, $scope, Login, api, $cookies) {
     $scope.login = function(){
-        api.init();
         login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
         api.init(data['token']);
             $cookies['token']=data['token'];
