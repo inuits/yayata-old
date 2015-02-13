@@ -1,7 +1,20 @@
-<div>
-    <form>
-    <input type="text" data-ng-model="username"/>
-    <input type="text" data-ng-model="password"/>
-    <a data-ng-click="login()">Login</a>
-</form>
+<div class="header">
+<h1>Login</h1>
 </div>
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <div class="pure-control-group">
+            <label data-ng-style='styles["username"]' for="login">Login</label>
+            <input type="text" data-ng-model="username"/>
+        </div>
+
+        <div class="pure-control-group">
+            <label data-ng-style='styles["password"]' for="password">Password</label>
+            <input type="text" data-ng-model="password"/>
+        </div>
+
+        <div class="pure-controls">
+            <a type="submit" class="pure-button pure-button-primary" data-ng-click="login()">Login</a>
+        </div>
+    </fieldset>
+</form>

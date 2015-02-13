@@ -14,12 +14,32 @@ function LogoutCtrl($scope, $location, api, $cookieStore) {
 
 
 function LoginCtrl($scope, Login, api, $cookies,$location) {
+    $scope.fields = ['username', 'password']
+
+    $scope.styles = {};
+
+    var resetStyles = function(){
+        for (i = 0; i < $scope.fields.length; i++) { 
+            $scope.styles[$scope.fields[i]] = "";
+        }
+    }
     $scope.login = function(){
+        resetStyles()
         login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
             api.init(data['token']);
             $cookies['token']=data['token'];
             $location.path('/');
-        })
+        },
+        function (data){
+        $scope.errors=data.data;
+        resetStyles();
+        for (i = 0; i < $scope.fields.length; i++) {
+            if ($scope.fields[i] in data.data){
+                $scope.styles[$scope.fields[i]] = {"color":"red"};
+            }
+        }
+        }
+        )
     };
 };
 
