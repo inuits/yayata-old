@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>YAYATA</title>
-        <link rel="stylesheet" href="css/pure.css" />
-        <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/bootstrap-theme.css" />
         <script src="js/angular.js"></script>
         <script src="js/angular-resource.min.js"></script>
         <script src="js/angular-route.min.js"></script>
@@ -18,13 +18,23 @@
     </head>
     <body data-ng-app="Yata">
 
-    <div class="pure-menu pure-menu-open pure-menu-horizontal">
-        <a href="#/" class="pure-menu-heading">YAYATA</a>
-        <ul>
-            <li><a href="#/timesheets">Timesheets</a></li>
-            <li><a data-ng-if="$root.user.id" href="#/logout">Log Out ({{$root.user.username}})</a></li>
-        </ul>
-    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">Yayata</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/timesheets">Timesheets</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a data-ng-if="$root.user.id" href="#/logout">Log Out ({{$root.user.username}})</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="content" data-ng-view></div>
     </body>
 </html>
