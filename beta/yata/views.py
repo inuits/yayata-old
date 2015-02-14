@@ -5,11 +5,31 @@ from rest_framework.decorators import api_view
 from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.views import obtain_auth_token
 
+
+@api_view(['POST'])
+def token_view(request):
+    '''
+    API endpoint that allows users to get a token
+    ---
+    parameters:
+        - name: username
+          description: The username you want to get the token
+        - name: password
+          description: Password of the user
+          type: password
+    '''
+    return obtain_auth_token(request)
 
 
 @api_view(['GET'])
-def me(request):
+def me_view(request):
+    '''
+    API endpoint that gives the current user data
+    ---
+    serializer: UserSerializer
+    '''
     serializer = UserSerializer(request.user,context={'request': request})
     return Response(serializer.data)
 

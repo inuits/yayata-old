@@ -17,7 +17,8 @@ router.register(r'hours', views.HourViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-token-auth/', authtoken_views.obtain_auth_token),
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include(router.urls)),
+    url(r'^api/me', views.me_view),
+    url(r'^api/token/', views.token_view),
+    url(r'^', include('rest_framework_swagger.urls')),
 ]

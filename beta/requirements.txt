@@ -1,9 +1,10 @@
 Django==1.7.4
 Markdown==2.5.2
+PyYAML==3.11
 django-cors-headers==1.0.0
 django-countries==3.1.1
 django-filter==0.9.2
-django-oauth2-provider==0.2.7-dev
+django-rest-swagger==0.2.8
 djangorestframework==3.0.4
 shortuuid==0.4.2
 six==1.9.0

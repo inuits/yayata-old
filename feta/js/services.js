@@ -23,7 +23,7 @@ factory('httpInterceptor', function ($q, $window, $location, $cookieStore) {
     };
 }).
 factory('Login', function($resource){
-    return $resource(BetaApiUrl + 'api-token-auth/', {}, {
+    return $resource(BetaApiUrl + 'token/', {}, {
         login: {method:'POST'}
     });
 }).

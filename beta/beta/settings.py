@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django_countries',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'corsheaders',
     'yata',
 )
@@ -114,7 +115,19 @@ YATA_VERSION = '0-dev'
 REST_FRAMEWORK = {
         'DEFAULT_AUTHENTICATION_CLASSES': (
             'rest_framework.authentication.TokenAuthentication',
+            ),
+        'DEFAULT_RENDERER_CLASSES': (
+            'rest_framework.renderers.JSONRenderer',
             )
         }
 
 OAUTH_RESPONSE_TYPE_CHOICES = "token"
+
+
+SWAGGER_SETTINGS = {
+    'api_version': '0.1',
+    'info': {
+        'title': 'Yayata',
+    },
+    'doc_expansion': 'none',
+}
