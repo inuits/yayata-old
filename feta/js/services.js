@@ -22,9 +22,6 @@ factory('api', function ($http, $cookies, Me, $rootScope) {
 }).
 factory('httpInterceptor', function ($q, $window, $location, $cookieStore) {
     return {
-//      'request': function(config) {
-//        return config;
- //     },
      'responseError': function(response) {
             if (response.status === 401) {
                 $cookieStore.remove('token');
@@ -63,8 +60,8 @@ factory('Customer', function($resource){
     });
 }).
 factory('Timesheet', function($resource){
-    return $resource(BetaApiUrl + 'timesheets/:timesheetId', {}, {
-        query: {method:'GET', params:{timesheetId:''}, isArray:true},
+    return $resource(BetaApiUrl + 'timesheets/:timesheetId/', {}, {
+        query: {method:'GET', params:{timesheetId:''}},
         get: {method:'GET', params:{timesheetId:''}, isArray:true},
         create: {method:'POST', isArray:false, transformRequest:concatMonth}
     });

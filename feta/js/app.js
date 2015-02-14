@@ -5,7 +5,7 @@ var KanBanModule = angular.module('Yata', ['YataServices', ,'ngRoute','ngCookies
 
      $routeProvider.
          when('/timesheet/new', {templateUrl: yataUrls['timesheet_new'], controller: TimesheetNewCtrl}).
-         when('/timesheet/:Id', {templateUrl: yataUrls['timesheet_view'], controller: TimesheetViewCtrl}).
+         when('/timesheet/:timesheetId', {templateUrl: yataUrls['timesheet_view'], controller: TimesheetViewCtrl}).
          when('/login', {templateUrl: yataUrls['login_view'], controller: LoginCtrl}).
          when('/logout', {templateUrl: yataUrls['logout_view'], controller: LogoutCtrl}).
          when('/timesheets', {templateUrl: yataUrls['timesheet_list'], controller: TimesheetListCtrl})

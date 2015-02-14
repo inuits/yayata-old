@@ -31,47 +31,25 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     };
 };
 
-function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
-    var project = Project.query({},
-            function(){
-                $scope.projects = project;
-            }
-            );
-    var customer = Customer.query({},
-            function(){
-                $scope.customers = customer;
-            }
-            );
-    var company = Company.query({},
-            function(){
-                $scope.companies = company;
-            }
-            );
-
-    $scope.fields = ['project', 'company', 'month']
-
-        $scope.styles = {};
-
-    var resetStyles = function(){
-        for (i = 0; i < $scope.fields.length; i++) { 
-            $scope.styles[$scope.fields[i]] = "";
-        }
-    }
-
+function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $location){
+    var project = Project.query({}, function(){ $scope.projects = project; });
+    var customer = Customer.query({}, function(){ $scope.customers = customer; });
+    var company = Company.query({}, function(){ $scope.companies = company; });
     $scope.errors = {};
-
-    $scope.create = function(){Timesheet.create($scope.timesheet).$promise.then(function(data){
-        console.log(data);
-    },
-    function(data){
-        $scope.errors=data.data;
-        resetStyles();
-        for (i = 0; i < $scope.fields.length; i++) {
-            if ($scope.fields[i] in data.data){
-                $scope.styles[$scope.fields[i]] = {"color":"red"};
+    $scope.create = function(){
+        Timesheet.create($scope.timesheet).$promise.then(
+            function(data){
+                $location.path('/timesheet/'+data.id)
+            },
+            function(data){
+                $scope.errors=data.data;
+                resetStyles();
+                for (i = 0; i < $scope.fields.length; i++) {
+                    if ($scope.fields[i] in data.data){
+                        $scope.styles[$scope.fields[i]] = {"color":"red"};
+                    }
+                }
             }
-        }
-    }
     )};
 
     var month = {};
