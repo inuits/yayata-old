@@ -1,42 +1,61 @@
-<div class="header">
-    <h1>Timesheets</h1>
+<div class="container">
+    <h1>New timesheet</h1>
+    <form class="form-horizontal">
+        <div class="alert alert-danger" ng-if="errors.detail">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{errors.detail}}
+        </div>
+        <div class="alert alert-danger" data-ng-repeat="message in errors.non_field_errors">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{message}}
+        </div>
+        <div data-ng-class="{'form-group': true, 'has-error': errors.month}">
+            <label class="control-label col-sm-2">Month</label>
+            <div class="col-sm-2">
+                <select class="form-control col-sm-10" data-ng-model="timesheet.monthonly">
+                    <option data-ng-repeat='(i, m) in month' value="{{i}}">{{m}}</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control" data-ng-model="timesheet.year">
+                    <option data-ng-repeat="y in years" value="{{y}}">{{y}}</option>
+                </select>
+            </div>
+        </div>
+        <div data-ng-repeat="message in errors.month" data-ng-include="'templates/error.html'"></div>
+
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="customer">Customer</label>
+            <div class="col-sm-10">
+                <select class="form-control" ng-model="customer.id">
+                    <option data-ng-repeat="c in customers" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div data-ng-class="{'form-group': true, 'has-error': errors.project}">
+            <label class="control-label col-sm-2" for="customer">Project</label>
+            <div class="col-sm-10">
+                <select class="form-control" ng-model="timesheet.project">
+                    <option data-ng-repeat="p in projects|filter:customer" value="{{p.id}}">{{p.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div data-ng-repeat="message in errors.project" data-ng-include="'templates/error.html'"></div>
+        <div data-ng-class="{'form-group': true, 'has-error': errors.company}">
+            <label class="control-label col-sm-2" for="company">Company</label>
+            <div class="col-sm-10">
+                <select class="form-control" ng-model="timesheet.company">
+                    <option data-ng-repeat="c in companies" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div data-ng-repeat="message in errors.company" data-ng-include="'templates/error.html'"></div>
+        <div class="form-group">
+            <div class="col-sm-2"></div><div class="col-sm-10">
+            <input type="submit" class="btn btn-primary" data-ng-click="create()" value="Submit"/>
+        </div>
+        </div>
+
+    </form>
 </div>
-<form class="pure-form pure-form-aligned">
-    <fieldset>
-        <div class="pure-control-group">
-            <label data-ng-style='styles["month"]' for="name">Month</label>
-            <select data-ng-model="timesheet.month">
-                <option data-ng-repeat='(i, m) in month' ng-selected="i == thismonth" value="{{i}}">{{m}}</option>
-            </select>
-            <select data-ng-model="timesheet.year">
-                <option data-ng-repeat="y in years" ng-selected="y == currentyear" value="{{y}}">{{y}}</option>
-            </select>
-        </div>
-
-        <div class="pure-control-group">
-            <label for="password">Customer</label>
-            <select ng-model="customer.id">
-                <option data-ng-repeat="c in customers" value="{{c.id}}">{{c.name}}</option>
-            </select>
-        </div>
-
-Z       <div class="pure-control-group">
-            <label data-ng-style='styles["project"]' for="email">Project</label>
-            <select ng-model="timesheet.project">
-                <option data-ng-repeat="p in projects|filter:customer" value="{{p.id}}">{{p.name}}</option>
-            </select>
-        </div>
-
-        <div class="pure-control-group">
-            <label data-ng-style='styles["company"]' for="email">Company</label>
-            <select ng-model="timesheet.company">
-                <option data-ng-repeat="c in companies" value="{{c.id}}">{{c.name}}</option>
-            </select>
-        </div>
-
-        <div class="pure-controls">
-
-            <a type="submit" class="pure-button pure-button-primary" data-ng-click="create()">Submit</a>
-        </div>
-    </fieldset>
-</form>
