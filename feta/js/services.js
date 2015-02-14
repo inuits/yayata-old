@@ -1,10 +1,11 @@
 angular.module('YataServices', ['ngResource', 'ngSanitize']).
-factory('api', function ($http, $cookies) {
+factory('api', function ($http, $cookies, Me, $rootScope) {
     return {
         init: function (token) {
             token = token || $cookies.token;
             if (token) {$http.defaults.headers.common['Authorization'] = "Token " + token;}
             else if ($http.defaults.headers.common['Authorization']){delete($http.defaults.headers.common['Authorization'])}
+            $rootScope.user = Me.get();
         }
     }
 }).
@@ -21,6 +22,11 @@ factory('httpInterceptor', function ($q, $window, $location, $cookieStore) {
             return $q.reject(response);
       }
     };
+}).
+factory('Me', function($resource){
+    return $resource(BetaApiUrl + 'me/', {}, {
+        get: {method:'GET'}
+    });
 }).
 factory('Login', function($resource){
     return $resource(BetaApiUrl + 'token/', {}, {

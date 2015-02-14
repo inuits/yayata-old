@@ -12,6 +12,13 @@
             <label data-ng-style='styles["password"]' for="password">Password</label>
             <input type="text" data-ng-model="password"/>
         </div>
+        <div class="pure-control-group">
+            <label for="cookies">Remember me</label>
+            <input type="checkbox" data-ng-model="use_cookies"/>
+        </div>
+        <div class="pure-control-group" ng-if="use_cookies">
+            By setting this option this application will store your API key in a cookie. You can delete that cookie by logging out.
+        </div>
 
         <div class="pure-controls">
             <a type="submit" class="pure-button pure-button-primary" data-ng-click="login()">Login</a>

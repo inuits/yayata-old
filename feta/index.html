@@ -19,10 +19,10 @@
     <body data-ng-app="Yata">
 
     <div class="pure-menu pure-menu-open pure-menu-horizontal">
-        <a href="#" class="pure-menu-heading">YAYATA</a>
+        <a href="#/" class="pure-menu-heading">YAYATA</a>
         <ul>
-            <li><a href="#/">Home</a></li>
-            <li><a href="#/logout">logout</a></li>
+            <li><a href="#/timesheets">Timesheets</a></li>
+            <li><a data-ng-if="$root.user.id" href="#/logout">Log Out ({{$root.user.username}})</a></li>
         </ul>
     </div>
     <div class="content" data-ng-view></div>

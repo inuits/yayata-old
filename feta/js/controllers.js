@@ -13,8 +13,9 @@ function LogoutCtrl($scope, $location, api, $cookieStore) {
 };
 
 
-function LoginCtrl($scope, Login, api, $cookies,$location) {
+function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     $scope.fields = ['username', 'password']
+    $scope.use_cookies = false;
 
     $scope.styles = {};
 
@@ -24,20 +25,23 @@ function LoginCtrl($scope, Login, api, $cookies,$location) {
         }
     }
     $scope.login = function(){
-        resetStyles()
+        resetStyles();
         login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
             api.init(data['token']);
-            $cookies['token']=data['token'];
+            if ($scope.use_cookies){
+                $cookies['token'] = data['token'];
+            }
             $location.path('/');
         },
         function (data){
-        $scope.errors=data.data;
-        resetStyles();
-        for (i = 0; i < $scope.fields.length; i++) {
-            if ($scope.fields[i] in data.data){
-                $scope.styles[$scope.fields[i]] = {"color":"red"};
+            $scope.errors=data.data;
+            resetStyles();
+            for (i = 0; i < $scope.fields.length; i++) {
+                if ($scope.fields[i] in data.data){
+                    $scope.styles[$scope.fields[i]] = {"color":"red"};
+                }
             }
-        }
+            api.init();
         }
         )
     };
@@ -45,24 +49,24 @@ function LoginCtrl($scope, Login, api, $cookies,$location) {
 
 function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     var project = Project.query({},
-        function(){
-            $scope.projects = project;
-        }
-    );
+            function(){
+                $scope.projects = project;
+            }
+            );
     var customer = Customer.query({},
-        function(){
-            $scope.customers = customer;
-        }
-    );
+            function(){
+                $scope.customers = customer;
+            }
+            );
     var company = Company.query({},
-        function(){
-            $scope.companies = company;
-        }
-    );
+            function(){
+                $scope.companies = company;
+            }
+            );
 
     $scope.fields = ['project', 'company', 'month']
 
-    $scope.styles = {};
+        $scope.styles = {};
 
     var resetStyles = function(){
         for (i = 0; i < $scope.fields.length; i++) { 
@@ -75,15 +79,15 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     $scope.create = function(){Timesheet.create($scope.timesheet).$promise.then(function(data){
         console.log(data);
     },
-        function(data){
-            $scope.errors=data.data;
-            resetStyles();
-            for (i = 0; i < $scope.fields.length; i++) {
+    function(data){
+        $scope.errors=data.data;
+        resetStyles();
+        for (i = 0; i < $scope.fields.length; i++) {
             if ($scope.fields[i] in data.data){
                 $scope.styles[$scope.fields[i]] = {"color":"red"};
             }
-            }
         }
+    }
     )};
 
     var month = {};
@@ -112,8 +116,8 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
 
 function TimesheetViewCtrl($scope, $routeParams, Timesheet){
     var timesheet = Timesheet.query({'timesheetId': $routeParams.timesheetId},
-        function(){
-            $scope.timesheet = timesheet;
-        }
-    );
+            function(){
+                $scope.timesheet = timesheet;
+            }
+            );
 }
