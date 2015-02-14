@@ -1,28 +1,26 @@
-<div class="header">
+<div class="container">
     <h1>Timesheets</h1>
+    <a class="btn btn-primary" href="#/timesheet/new">New Timesheet</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Month</th>
+                <th>Customer</th>
+                <th>Project</th>
+                <th>Company</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="timesheet in timesheets">
+            <td>{{timesheet.id}}</td>
+            <td>{{timesheet.month}}</td>
+            <td>{{timesheet.customer_name}}</td>
+            <td>{{timesheet.project_name}}</td>
+            <td>{{timesheet.company_name}}</td>
+            <td><a class="bt btn-primary" href="#">Open</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<div class="buttons">
-<a class="pure-button pure-button-primary" href="#/timesheet/new">New Timesheet</a>
-</div>
-<table class="pure-table">
-<thead>
-    <tr>
-        <th>#</th>
-        <th>Month</th>
-        <th>Customer</th>
-        <th>Project</th>
-        <th>Company</th>
-        <th>Actions</th>
-    </tr>
-</thead>
-<tbody>
-<tr data-ng-repeat="timesheet in timesheets">
-    <td>{{timesheet.id}}</td>
-    <td>{{timesheet.month}}</td>
-    <td>{{timesheet.customer_name}}</td>
-    <td>{{timesheet.project_name}}</td>
-    <td>{{timesheet.company_name}}</td>
-    <td><a class="pure-button pure-button-primary" href="#">Open</a></td>
-</tr>
-</tbody>
-</table>
