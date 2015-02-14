@@ -88,14 +88,14 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company){
     month[10] = "November";
     month[11] = "December";
     $scope.month = month;
-    $scope.thismonth = new Date().getMonth();
+    $scope.monthonly = new Date().getMonth();
     var currentYear = new Date().getFullYear(), years = [];
     startYear = 2007;
     while ( startYear <= currentYear + 1 ) {
         years.push(startYear++);
     }
     $scope.years = years;
-    $scope.currentyear = currentYear;
+    $scope.year = currentYear;
 }
 
 function TimesheetViewCtrl($scope, $routeParams, Timesheet){

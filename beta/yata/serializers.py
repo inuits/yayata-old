@@ -42,16 +42,16 @@ class TimesheetSerializer(serializers.ModelSerializer):
                 'group', 'group_name',
                 'user', 'user_name')
 
-    def is_valid(self, *args, **kwargs):
-        is_valid = super(TimesheetSerializer, self).is_valid(*args, **kwargs)
-        validated_data = dict(
-            list(self.validated_data.items()) +
-            list(kwargs.items())
-        )
-        if (not validated_data.has_key('user') or validated_data['user'] == None) and \
-        (not validated_data.has_key('group') or validated_data['group'] == None):
-            raise(serializers.ValidationError({'detail':'You must set a user or a group'}))
-        return is_valid
+    #def is_valid(self, *args, **kwargs):
+    #    is_valid = super(TimesheetSerializer, self).is_valid(*args, **kwargs)
+    #    validated_data = dict(
+    #        list(self.validated_data.items()) +
+    #        list(kwargs.items())
+    #    )
+    #    #if (not validated_data.has_key('user') or validated_data['user'] == None) and \
+    #    #(not validated_data.has_key('group') or validated_data['group'] == None):
+    #    #    raise(serializers.ValidationError({'detail':'You must set a user or a group'}))
+    #    #return is_valid
 
 class HourSerializer(serializers.ModelSerializer):
     class Meta:

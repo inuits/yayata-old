@@ -72,6 +72,9 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     serializer_class = TimesheetSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
     def get_queryset(self):
         user = self.request.user
         queryset = Timesheet.objects.filter(user=user.id)
