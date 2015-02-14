@@ -1,23 +1,24 @@
+<div class="container">
 <div class="content">
 <h1>Login</h1>
 </div>
 <form class="pure-form pure-form-aligned">
     <fieldset>
-        <div class="pure-control-group">
-            <label data-ng-style='styles["username"]' for="login">Login</label>
-            <input type="text" data-ng-model="username"/>
+        <div data-ng-class="{'form-group': true, 'has-error': errors.username}">
+            <label class="control-label" for="login">Login</label>
+            <input class="form-control" type="text" data-ng-model="username"/>
         </div>
 
-        <div class="pure-control-group">
-            <label  data-ng-style='styles["password"]' for="password">Password</label>
-            <input ng-class='class["password"]' type="text" data-ng-model="password"/>
+        <div data-ng-class="{'form-group': true, 'has-error': errors.password}">
+            <label class="control-label" for="password">Password</label>
+            <input class="form-control" type="text" data-ng-model="password"/>
         </div>
-        <div class="pure-control-group">
-            <label for="cookies">Remember me</label>
+        <div class="form-group">
             <input type="checkbox" data-ng-model="use_cookies"/>
-        </div>
-        <div class="pure-control-group" ng-if="use_cookies">
-            By setting this option this application will store your API key in a cookie. You can delete that cookie by logging out.
+            <label for="cookies">Remember me</label>
+            <div class="help-block" data-ng-if="use_cookies">
+                By setting this option this application will store your API key in a cookie. You can delete that cookie by logging out.
+            </div>
         </div>
 
         <div class="pure-controls">
@@ -25,3 +26,4 @@
         </div>
     </fieldset>
 </form>
+</div>
