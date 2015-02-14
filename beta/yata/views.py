@@ -74,10 +74,7 @@ class TimesheetViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.has_perm('yata.view_all_timesheets'):
-            queryset = Timesheet.objects.all()
-        else:
-            queryset = Timesheet.objects.filter(user=user.id)
+        queryset = Timesheet.objects.filter(user=user.id)
         return queryset
 
 
