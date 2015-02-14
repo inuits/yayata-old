@@ -1,29 +1,27 @@
 <div class="container">
-<div class="content">
-<h1>Login</h1>
-</div>
-<form class="pure-form pure-form-aligned">
-    <fieldset>
-        <div data-ng-class="{'form-group': true, 'has-error': errors.username}">
-            <label class="control-label" for="login">Login</label>
-            <input class="form-control" type="text" data-ng-model="username"/>
+    <h1>Login</h1>
+    <form>
+        <div class="alert alert-info" ng-if="use_cookies">The remember me option is enable, so your api key will be stored in a cookie.</div>
+        <div class="alert alert-danger" data-ng-repeat="message in errors.non_field_errors">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            {{message}}
         </div>
-
-        <div data-ng-class="{'form-group': true, 'has-error': errors.password}">
-            <label class="control-label" for="password">Password</label>
-            <input class="form-control" type="text" data-ng-model="password"/>
-        </div>
-        <div class="form-group">
-            <input type="checkbox" data-ng-model="use_cookies"/>
-            <label for="cookies">Remember me</label>
-            <div class="help-block" data-ng-if="use_cookies">
-                By setting this option this application will store your API key in a cookie. You can delete that cookie by logging out.
+        <fieldset>
+            <div data-ng-class="{'form-group': true, 'has-error': errors.username}">
+                <label class="control-label" for="login">Login</label>
+                <div class="label label-danger" data-ng-repeat="message in errors.username">{{message}}</div>
+                <input class="form-control" type="text" data-ng-model="username"/>
             </div>
-        </div>
 
-        <div class="pure-controls">
-            <a type="submit" class="pure-button pure-button-primary" data-ng-click="login()">Login</a>
-        </div>
-    </fieldset>
-</form>
+            <div data-ng-class="{'form-group': true, 'has-error': errors.password}">
+                <label class="control-label" for="password">Password</label>
+                <div class="label label-danger" data-ng-repeat="message in errors.password">{{message}}</div>
+                <input class="form-control" type="password" data-ng-model="password"/>
+            </div>
+            <div class="form-group">
+                <input type="button" ng-click="use_cookies=!use_cookies" data-ng-class="{'btn':true, 'btn-default':true, 'active': use_cookies}" value="Remember me"/>
+                <input type="submit" class="btn btn-primary" data-ng-click="login()" value="Login"/>
+            </div>
+        </fieldset>
+    </form>
 </div>
