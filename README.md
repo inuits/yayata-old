@@ -20,6 +20,8 @@ Not working ; very early stage
 
 
 ![Screenshot](misc/screenshot.png?raw=true "Screenshot of YAYATA frontend")
+![Screenshot](misc/screenshot-2.png?raw=true "Screenshot of YAYATA frontend")
+![Screenshot](misc/screenshot-3.png?raw=true "Screenshot of YAYATA frontend")
 
 
 
