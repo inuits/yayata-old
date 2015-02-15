@@ -29,6 +29,7 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
         },
         function (data){
             $scope.errors=data.data;
+            api.init();
         }
         )
     };
