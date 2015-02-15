@@ -8,6 +8,11 @@ class Customer(models.Model):
     name = models.CharField(max_length=30)
     country = CountryField()
 
+    class Meta:
+        permissions = (
+            ('api_read_only', 'Read-Only full API access'),
+        )
+
     def __unicode__(self):
         return self.name
 
@@ -15,10 +20,11 @@ class Project(models.Model):
     short_name = models.CharField(max_length=5)
     name = models.CharField(max_length=30)
     customer = models.ForeignKey('Customer')
-    #start_date = models.DateField(blank=True,null=True)
-    #end_date = models.DateField(blank=True,null=True)
-    #billable = models.BooleanField(default=True)
-    #groups = models.ManyToManyField(Group, blank=True)
+
+    class Meta:
+        permissions = (
+            ('api_read_only', 'Read-Only full API access'),
+        )
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.customer.name)
@@ -26,6 +32,11 @@ class Project(models.Model):
 class Company(models.Model):
     ''' The companies that will make invoices '''
     name = models.CharField(max_length=30)
+
+    class Meta:
+        permissions = (
+            ('api_read_only', 'Read-Only full API access'),
+        )
 
     def __unicode__(self):
         return self.name
@@ -42,7 +53,7 @@ class Timesheet(models.Model):
 
     class Meta:
         permissions = (
-            ('api_read_only', 'Read-Only API access to every timesheet'),
+            ('api_read_only', 'Read-Only full API access'),
         )
 
     def clean(self):
@@ -63,6 +74,6 @@ class Hour(models.Model):
 
     class Meta:
         permissions = (
-            ('view_hour', 'View hour'),
+            ('api_read_only', 'Read-Only full API access'),
         )
 
