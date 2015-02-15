@@ -3,10 +3,6 @@ from django_countries.fields import CountryField
 from django.contrib.auth.models import Group, User
 from django.core.exceptions import ValidationError
 
-class ApiStatus(models.Model):
-        user = models.OneToOneField(User)
-        read_only_api = models.BooleanField(default=False)
-
 class Customer(models.Model):
     short_name = models.CharField(max_length=5)
     name = models.CharField(max_length=30)
@@ -46,10 +42,7 @@ class Timesheet(models.Model):
 
     class Meta:
         permissions = (
-            ('view_all_timesheets', 'View all the timesheets'),
-            ('change_timesheet_company', 'Change the company'),
-            ('change_timesheet_user', 'Change the timesheet user'),
-            ('change_timesheet_group', 'Change the timesheet group'),
+            ('api_read_only', 'Read-Only API access to every timesheet'),
         )
 
     def clean(self):
