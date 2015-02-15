@@ -2,10 +2,11 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer, PermissionSerializer
+from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import obtain_auth_token
+from permissions import TimesheetPermission
 
 
 @api_view(['POST'])
@@ -32,23 +33,7 @@ def me_view(request):
     serializer: UserSerializer
     '''
     serializer = UserSerializer(request.user,context={'request': request})
-    print serializer.data
-    print request.user
     return Response(serializer.data)
-
-@api_view(['GET'])
-def permissions_view(request):
-    '''
-    API endpoint that gives the current user permissions
-    ---
-    '''
-    queryset = request.user.user_permissions.all()
-    print 'perm'
-    print queryset
-    result = []
-    for permission in queryset:
-        result.append(PermissionSerializer(permission,context={'request': request}).data)
-    return Response(result)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -86,7 +71,7 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows timesheets to be viewed or edited.
     """
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,TimesheetPermission)
     serializer_class = TimesheetSerializer
 
     def perform_create(self, serializer):

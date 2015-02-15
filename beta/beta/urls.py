@@ -18,7 +18,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/', include(router.urls)),
     url(r'^api/me/$', views.me_view),
-    url(r'^api/permissions/', views.permissions_view),
     url(r'^api/token/', views.token_view),
     url(r'^', include('rest_framework_swagger.urls')),
 ]

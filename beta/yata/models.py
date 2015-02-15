@@ -3,6 +3,10 @@ from django_countries.fields import CountryField
 from django.contrib.auth.models import Group, User
 from django.core.exceptions import ValidationError
 
+class ApiStatus(models.Model):
+        user = models.OneToOneField(User)
+        read_only_api = models.BooleanField(default=False)
+
 class Customer(models.Model):
     short_name = models.CharField(max_length=5)
     name = models.CharField(max_length=30)

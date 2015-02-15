@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from models import Customer, Project, Timesheet, Hour, Company
 
@@ -7,16 +7,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'url', 'username', 'email', 'groups')
 
-class PermissionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Permission
-        fields = ('id', 'codename', 'name')
-
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('id', 'url', 'name')
-
 
 class CustomerSerializer(serializers.ModelSerializer):
     country =  serializers.CharField()
@@ -45,17 +39,6 @@ class TimesheetSerializer(serializers.ModelSerializer):
                 'company', 'company_name',
                 'group', 'group_name',
                 'user', 'user_name')
-
-    #def is_valid(self, *args, **kwargs):
-    #    is_valid = super(TimesheetSerializer, self).is_valid(*args, **kwargs)
-    #    validated_data = dict(
-    #        list(self.validated_data.items()) +
-    #        list(kwargs.items())
-    #    )
-    #    #if (not validated_data.has_key('user') or validated_data['user'] == None) and \
-    #    #(not validated_data.has_key('group') or validated_data['group'] == None):
-    #    #    raise(serializers.ValidationError({'detail':'You must set a user or a group'}))
-    #    #return is_valid
 
 class HourSerializer(serializers.ModelSerializer):
     class Meta:
