@@ -44,7 +44,7 @@ def permissions_view(request):
     '''
     queryset = request.user.user_permissions.all()
     print 'perm'
-    print queryset()
+    print queryset
     result = []
     for permission in queryset:
         result.append(PermissionSerializer(permission,context={'request': request}).data)
