@@ -1,9 +1,12 @@
-function TimesheetListCtrl($scope, Timesheet){
+function TimesheetListCtrl($scope, Timesheet, $location){
     var timesheet = Timesheet.query({},
         function(){
             $scope.timesheets = timesheet;
         }
     );
+    $scope.open = function(data){
+        $location.path('/timesheet/'+data)
+    }
 }
 
 function LogoutCtrl($scope, $location, api, $cookieStore) {
@@ -77,7 +80,7 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
 }
 
 function TimesheetViewCtrl($scope, $routeParams, Timesheet){
-    var timesheet = Timesheet.query({'timesheetId': $routeParams.timesheetId},
+    var timesheet = Timesheet.get({'timesheetId': $routeParams.timesheetId},
             function(){
                 $scope.timesheet = timesheet;
             }
