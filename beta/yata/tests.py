@@ -60,10 +60,6 @@ class ACLTimesheetTestCase(YataTest):
         self.ts4.group = Group.objects.create(name='ares')
         self.ts4.user = None
 
-        content_type = ContentType.objects.get_for_model(Timesheet)
-        self.view_all_acl_permission = Permission.objects.get(content_type=content_type, codename='view_all_timesheets')
-
-        self.ts1.user.user_permissions.add(self.view_all_acl_permission)
 
     def test_all_acl_permission(self):
         '''test that ts1 user see both timesheets'''
