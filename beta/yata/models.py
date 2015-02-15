@@ -10,7 +10,7 @@ class Customer(models.Model):
 
     class Meta:
         permissions = (
-            ('api_read_only', 'Read-Only full API access'),
+            ('read_only_customer', 'Read-Only all the customers'),
         )
 
     def __unicode__(self):
@@ -23,7 +23,7 @@ class Project(models.Model):
 
     class Meta:
         permissions = (
-            ('api_read_only', 'Read-Only full API access'),
+            ('read_only_project', 'Read-Only all the projects'),
         )
 
     def __unicode__(self):
@@ -32,11 +32,6 @@ class Project(models.Model):
 class Company(models.Model):
     ''' The companies that will make invoices '''
     name = models.CharField(max_length=30)
-
-    class Meta:
-        permissions = (
-            ('api_read_only', 'Read-Only full API access'),
-        )
 
     def __unicode__(self):
         return self.name
@@ -53,7 +48,7 @@ class Timesheet(models.Model):
 
     class Meta:
         permissions = (
-            ('api_read_only', 'Read-Only full API access'),
+            ('read_only_timesheet', 'Read-Only all the timesheets'),
         )
 
     def clean(self):
@@ -74,6 +69,6 @@ class Hour(models.Model):
 
     class Meta:
         permissions = (
-            ('api_read_only', 'Read-Only full API access'),
+            ('read_only_hours', 'Read-Only all the hours'),
         )
 

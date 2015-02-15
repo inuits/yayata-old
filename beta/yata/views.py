@@ -6,7 +6,7 @@ from serializers import UserSerializer, GroupSerializer, CustomerSerializer, Pro
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import obtain_auth_token
-from permissions import TimesheetPermission
+from permissions import OwnerOrAdminPermission
 
 
 @api_view(['POST'])
@@ -71,7 +71,7 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows timesheets to be viewed or edited.
     """
-    permission_classes = (IsAuthenticated,TimesheetPermission)
+    permission_classes = (IsAuthenticated, OwnerOrAdminPermission)
     serializer_class = TimesheetSerializer
 
     def perform_create(self, serializer):
