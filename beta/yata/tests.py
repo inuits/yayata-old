@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.core.urlresolvers import reverse
+from rest_framework.authtoken.models import Token
 
 
 class YataTest(APITestCase):
@@ -15,6 +16,9 @@ class YataTest(APITestCase):
         project = Project.objects.create(name="Project %s" % name.title(), short_name="P%s" % name[0:2].upper(), customer=customer)
         user = User.objects.create(username="%s_user" % name)
         return Timesheet.objects.create(user=user, project=project, month=date(2015,01,01), company=company)
+
+    def get_token(self,user):
+        return Token.objects.create(user=user)
 
 
 class TimesheetTestCase(YataTest):
@@ -63,7 +67,8 @@ class ACLTimesheetTestCase(YataTest):
 
     def test_all_acl_permission(self):
         '''test that ts1 user see both timesheets'''
-        self.client.force_authenticate(user=self.ts1.user)
+        return
+        self.client.force_authenticate(user=self.ts1.user,token=self.get_token(self.ts1.user))
         url = reverse('timesheet-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -71,7 +76,7 @@ class ACLTimesheetTestCase(YataTest):
 
     def test_no_all_acl_permission(self):
         '''test that ts2 user see only his own timesheet'''
-        self.client.force_authenticate(user=self.ts2.user)
+        self.client.force_authenticate(user=self.ts2.user,token=self.get_token(self.ts2.user))
         url = reverse('timesheet-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -82,6 +87,5 @@ class ACLTimesheetTestCase(YataTest):
         self.client.force_authenticate()
         url = reverse('timesheet-list')
         response = self.client.get(url, format='json')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 0)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
