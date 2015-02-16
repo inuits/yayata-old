@@ -90,6 +90,13 @@ class ACLTimesheetTestCase(YataTest):
         response = self.client.patch(url, {'project': self.ts1.project.id})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
+    def test_get_locked_timesheet_as_user(self):
+        '''test that ts6 can get its timesheet'''
+        self.client.force_authenticate(user=self.ts6.user, token=self.get_token(self.ts6.user))
+        url = reverse('timesheet-detail', args=[self.ts6.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_no_all_acl_permission(self):
         '''test that ts2 user see only his own timesheet'''
         self.client.force_authenticate(user=self.ts2.user,token=self.get_token(self.ts2.user))
