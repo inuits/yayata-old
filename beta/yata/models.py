@@ -42,6 +42,7 @@ class Timesheet(models.Model):
     company = models.ForeignKey('Company')
     group = models.ForeignKey(Group,blank=True,null=True)
     user = models.ForeignKey(User,blank=True,null=True)
+    locked = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s - %s - %s" % (self.month, unicode(self.project), unicode(self.user))
