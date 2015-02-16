@@ -5,7 +5,7 @@ from models import Customer, Project, Timesheet, Hour, Company
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'url', 'username', 'email', 'groups')
+        fields = ('id', 'url', 'username', 'email', 'groups', 'is_staff')
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
