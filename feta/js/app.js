@@ -11,7 +11,7 @@ var KanBanModule = angular.module('Yata', ['YataServices', ,'ngRoute','ngCookies
          when('/timesheets', {templateUrl: yataUrls['timesheet_list'], controller: TimesheetListCtrl})
          .otherwise({ redirectTo: '/timesheets' });
  }])
-.run(function (api, Me, $rootScope) {
+.run(function (api) {
       api.init();
 });
 //.config(['$locationProvider', function($locationProvider) {
