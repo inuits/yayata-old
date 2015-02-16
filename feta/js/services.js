@@ -62,6 +62,7 @@ factory('Customer', function($resource){
 factory('Timesheet', function($resource){
     return $resource(BetaApiUrl + 'timesheets/:timesheetId/', {}, {
         query: {method:'GET', url:BetaApiUrl + 'timesheets/', isArray:true},
+        lock: {method:'PUT', params:{timesheetId:'@id'}, url:BetaApiUrl + 'timesheets/:timesheetId/lock/', isArray:false},
         get: {method:'GET', params:{timesheetId:''}},
         create: {method:'POST', isArray:false, transformRequest:concatMonth}
     });

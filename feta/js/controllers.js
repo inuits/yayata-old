@@ -4,6 +4,13 @@ function TimesheetListCtrl($scope, Timesheet, $location){
             $scope.timesheets = timesheet;
         }
     );
+    $scope.lock = function(timesheet){
+        Timesheet.lock({'id': timesheet.id, 'lock': !timesheet.is_locked}).$promise.then(
+            function(data){
+                timesheet.is_locked = data.locked;
+            }
+            )
+    }
     $scope.open = function(data){
         $location.path('/timesheet/'+data)
     }
