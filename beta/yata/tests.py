@@ -60,7 +60,7 @@ class ACLTimesheetTestCase(YataTest):
         self.ts4 = self.generate_timesheet('ares')
         self.ts5 = self.generate_timesheet('hermes')
         self.ts6 = self.copy_timesheet(self.ts5)
-        self.ts6.lock = True
+        self.ts6.locked = True
         self.ts6.save()
         self.ts4.group = Group.objects.create(name='ares')
         self.ts4.user = None
@@ -88,7 +88,7 @@ class ACLTimesheetTestCase(YataTest):
         self.client.force_authenticate(user=self.ts6.user, token=self.get_token(self.ts6.user))
         url = reverse('timesheet-detail', args=[self.ts6.id])
         response = self.client.patch(url, {'project': self.ts1.project.id})
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_no_all_acl_permission(self):
         '''test that ts2 user see only his own timesheet'''
