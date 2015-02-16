@@ -8,6 +8,6 @@ class OwnerOrAdminPermission:
         user = request.user
         if not user or not user.is_authenticated():
             return False
-        if user.is_staff or (obj.user == user and not obj.is_locked()):
+        if user.is_staff or (obj.user == user and not obj.locked):
             return True
         return False

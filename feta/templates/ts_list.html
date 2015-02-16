@@ -25,9 +25,9 @@
                     <a data-ng-click="lock(timesheet)" data-ng-class="{
                         'btn':true,
                         'btn-xs':true,
-                        'btn-default': !timesheet.is_locked,
-                        'btn-warning': timesheet.is_locked,
-                        'disabled': timesheet.is_locked && !$root.user.is_staff}">
+                        'btn-default': !timesheet.locked,
+                        'btn-warning': timesheet.locked,
+                        'disabled': timesheet.locked && !$root.user.is_staff}">
                         <i class="glyphicon glyphicon-lock"></i>
                     </a>
                 </div>

@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, detail_route
-from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer, LockSerializer
+from rest_framework.decorators import api_view
+from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import obtain_auth_token
@@ -74,20 +74,20 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, OwnerOrAdminPermission)
     serializer_class = TimesheetSerializer
 
-    @detail_route(methods=['PUT'])
-    def lock(self, request, pk=None):
-        """
-        Set the lock on a timesheet
-        ---
-        serializer: LockSerializer
-        """
-        timesheet = self.get_object()
-        serializer = LockSerializer(data=request.data)
-        serializer.is_valid()
-        if request.user.is_staff or not timesheet.locked:
-            timesheet.locked = serializer.data['lock']
-            timesheet.save()
-        return Response({'locked': timesheet.locked})
+   # @detail_route(methods=['PUT'])
+   # def lock(self, request, pk=None):
+   #     """
+   #     Set the lock on a timesheet
+   #     ---
+   #     serializer: LockSerializer
+   #     """
+   #     timesheet = self.get_object()
+   #     serializer = LockSerializer(data=request.data)
+   #     serializer.is_valid()
+   #     if request.user.is_staff or not timesheet.locked:
+   #         timesheet.locked = serializer.data['lock']
+   #         timesheet.save()
+   #     return Response({'locked': timesheet.locked})
 
 
     def perform_create(self, serializer):

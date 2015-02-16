@@ -5,9 +5,9 @@ function TimesheetListCtrl($scope, Timesheet, $location){
         }
     );
     $scope.lock = function(timesheet){
-        Timesheet.lock({'id': timesheet.id, 'lock': !timesheet.is_locked}).$promise.then(
+        Timesheet.update({'id': timesheet.id, 'locked': !timesheet.locked}).$promise.then(
             function(data){
-                timesheet.is_locked = data.locked;
+                timesheet.locked = data.locked;
             }
             )
     }

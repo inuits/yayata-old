@@ -2,11 +2,6 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from models import Customer, Project, Timesheet, Hour, Company
 
-class LockSerializer(serializers.Serializer):
-    lock = serializers.BooleanField()
-    class Meta:
-        fields = ('lock')
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -43,7 +38,7 @@ class TimesheetSerializer(serializers.ModelSerializer):
                 'project', 'project_name', 'customer_name',
                 'company', 'company_name',
                 'group', 'group_name',
-                'user', 'user_name', 'is_locked')
+                'user', 'user_name', 'locked')
 
 class HourSerializer(serializers.ModelSerializer):
     class Meta:

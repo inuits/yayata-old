@@ -61,9 +61,6 @@ class Timesheet(models.Model):
         self.full_clean()
         super(Timesheet, self).save(*args, **kwargs)
 
-    def is_locked(self):
-        return self.locked
-
 class Hour(models.Model):
     timesheet = models.ForeignKey('Timesheet')
     description = models.CharField(max_length=80, blank=True)
