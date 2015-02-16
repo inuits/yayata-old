@@ -20,13 +20,18 @@ factory('api', function ($http, $cookies, Me, $rootScope) {
         }
     }
 }).
-factory('httpInterceptor', function ($q, $window, $location, $cookieStore) {
+factory('httpInterceptor', function ($q, $window, $location, $cookieStore, $rootScope) {
     return {
      'responseError': function(response) {
             if (response.status === 401) {
                 $cookieStore.remove('token');
                 $location.url('/login');
             }
+            if ('detail' in response.data){
+                $rootScope.errors.push(
+                        {code: response.status, message: response.data.detail}
+                        )
+            };
             return $q.reject(response);
       }
     };

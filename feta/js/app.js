@@ -13,7 +13,9 @@ var KanBanModule = angular.module('Yata', ['YataServices', ,'ngRoute','ngCookies
  }])
 .run(function (api) {
       api.init();
-});
+}).run(function ($rootScope){
+    $rootScope.errors = [];
+})
 //.config(['$locationProvider', function($locationProvider) {
 //      $locationProvider.html5Mode(true).hashPrefix('!');
 //}])

@@ -35,6 +35,12 @@
             </div>
         </div>
     </nav>
+    <div class="container" data-ng-repeat="error in $root.errors" data-ng-show="!hide">
+        <div class="alert alert-danger alert-dismissible">
+              <button type="button" class="close" data-ng-click="hide=true"><span>&times;</span></button>
+              <strong>Error {{error.code}}</strong> {{error.message}}
+            </div>
+    </div>
     <div class="content" data-ng-view></div>
     </body>
 </html>
