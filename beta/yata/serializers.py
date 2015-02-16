@@ -38,7 +38,7 @@ class TimesheetSerializer(serializers.ModelSerializer):
                 'project', 'project_name', 'customer_name',
                 'company', 'company_name',
                 'group', 'group_name',
-                'user', 'user_name')
+                'user', 'user_name', 'is_locked')
 
 class HourSerializer(serializers.ModelSerializer):
     class Meta:
