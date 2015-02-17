@@ -104,11 +104,11 @@ class HourViewSet(viewsets.ModelViewSet):
     serializer_class = HourSerializer
 
     def perform_create(self, serializer):
-        serializer.save(timesheet=self.timesheet_pk)
+        serializer.save(timesheet=self.timesheet)
 
     def create(self, request, *args, **kwargs):
         if not 'timesheet_pk' in kwargs:
             raise Exception
-        self.timesheet_pk = Timesheet.objects.get(id=kwargs['timesheet_pk'])
+        self.timesheet = Timesheet.objects.get(id=kwargs['timesheet_pk'])
         return super(HourViewSet,self).create(request, *args, **kwargs)
 
