@@ -96,6 +96,27 @@ class ACLTimesheetTestCase(YataTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_modify_timesheet_as_superuser(self):
+        '''test that ts5 user can modify his timesheet'''
+        self.client.force_authenticate(user=self.ts3.user, token=self.get_token(self.ts3.user))
+        url = reverse('timesheet-detail', args=[self.ts5.id])
+        response = self.client.patch(url, {'project': self.ts1.project.id})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_modify_locked_timesheet_as_superuser(self):
+        '''test that ts3 user can change a locked timesheet'''
+        self.client.force_authenticate(user=self.ts3.user, token=self.get_token(self.ts3.user))
+        url = reverse('timesheet-detail', args=[self.ts6.id])
+        response = self.client.patch(url, {'project': self.ts1.project.id})
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_locked_timesheet_as_superuser(self):
+        '''test that ts3 user can get ts6 timesheet'''
+        self.client.force_authenticate(user=self.ts3.user, token=self.get_token(self.ts3.user))
+        url = reverse('timesheet-detail', args=[self.ts6.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_no_all_acl_permission(self):
         '''test that ts2 user see only his own timesheet'''
         self.client.force_authenticate(user=self.ts2.user,token=self.get_token(self.ts2.user))
