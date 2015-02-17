@@ -8,11 +8,6 @@ class Customer(models.Model):
     name = models.CharField(max_length=30)
     country = CountryField()
 
-    class Meta:
-        permissions = (
-            ('read_only_customer', 'Read-Only all the customers'),
-        )
-
     def __unicode__(self):
         return self.name
 
@@ -20,11 +15,6 @@ class Project(models.Model):
     short_name = models.CharField(max_length=5)
     name = models.CharField(max_length=30)
     customer = models.ForeignKey('Customer')
-
-    class Meta:
-        permissions = (
-            ('read_only_project', 'Read-Only all the projects'),
-        )
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.customer.name)
@@ -47,11 +37,6 @@ class Timesheet(models.Model):
     def __unicode__(self):
         return "%s - %s - %s" % (self.month, unicode(self.project), unicode(self.user))
 
-    class Meta:
-        permissions = (
-            ('read_only_timesheet', 'Read-Only all the timesheets'),
-        )
-
     def clean(self):
         self.month = self.month.replace(day = 1)
         if self.user == self.group == None:
@@ -63,12 +48,10 @@ class Timesheet(models.Model):
 
 class Hour(models.Model):
     timesheet = models.ForeignKey('Timesheet')
-    description = models.CharField(max_length=80, blank=True)
+    task = models.CharField(max_length=80, blank=True)
     hours = models.DecimalField(max_digits=4, decimal_places=2)
+    hours150 = models.DecimalField(max_digits=4, decimal_places=2)
+    hours200 = models.DecimalField(max_digits=4, decimal_places=2)
+    hourstravel = models.DecimalField(max_digits=4, decimal_places=2)
     day = models.DateField()
-
-    class Meta:
-        permissions = (
-            ('read_only_hours', 'Read-Only all the hours'),
-        )
 

@@ -43,7 +43,7 @@ class TimesheetSerializer(serializers.ModelSerializer):
 class HourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hour
-        fields = ('id', 'description', 'hours', 'day')
+        fields = ('id', 'task', 'hours', 'hours150', 'hours200', 'hourstravel', 'day')
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:
