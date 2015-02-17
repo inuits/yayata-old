@@ -4,5 +4,11 @@
         <tr><td>Customer:</td><td>{{timesheet.customer_name}}</td><td>Project:</td><td>{{timesheet.project_name}}</td></tr>
         <tr><td>Month:</td><td>{{timesheet.month}}</td><td>User:</td><td>{{timesheet.user_name}}</td></tr>
     </table>
+    <table class="table">
+        <tr><td>Day</td><td>Message</td><td>Hours</td><td>Actions</td></tr>
+        <tr data-ng-repeat="hour in hours"><td>{{hour.day}}</td><td>{{hour.message}}</td><td>{{hour.hours}}</td></tr>
+        <tr><td><input data-ng-model="hour.day"></td><td><input data-ng-model="hour.message"></td><td><input data-ng-model="hour.hours"></td><td><a class="btn btn-default btn-xs" data-ng-click="add()">Add</a></td></tr>
+    </table>
+
 </div>
 

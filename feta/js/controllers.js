@@ -87,10 +87,12 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
     $scope.year = currentYear;
 }
 
-function TimesheetViewCtrl($scope, $routeParams, Timesheet){
-    var timesheet = Timesheet.get({'timesheetId': $routeParams.timesheetId},
-            function(){
-                $scope.timesheet = timesheet;
-            }
-            );
+function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
+   Timesheet.get({'timesheetId': $routeParams.timesheetId},
+        function(data){ $scope.timesheet = data; });
+   Hour.get({'tid': $routeParams.timesheetId},
+        function(data){ $scope.hours = data; });
+    $scope.add = function(){
+        Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.hour));
+    }
 }

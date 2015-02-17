@@ -71,5 +71,11 @@ factory('Timesheet', function($resource){
         get: {method:'GET', params:{timesheetId:''}},
         create: {method:'POST', isArray:false, transformRequest:concatMonth}
     });
+}).
+factory('Hour', function($resource){
+    return $resource(BetaApiUrl + 'timesheets/:timesheetId/hours/:hourId/', {}, {
+        create: {method:'POST', params:{timesheetId:'@tid'}, url: BetaApiUrl + 'timesheets/:timesheetId/hours/', isArray:false},
+        get: {method:'GET', url: BetaApiUrl + 'timesheets/:tid/hours/', isArray:true},
+    });
 });
 
