@@ -132,3 +132,21 @@ class ACLTimesheetTestCase(YataTest):
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
+class HourTestCase(YataTest):
+    def setUp(self):
+        self.total_timesheet = 6
+        self.ts1 = self.generate_timesheet('zeus')
+        self.ts2 = self.generate_timesheet('appollo')
+        self.ts3 = self.generate_timesheet('artemis')
+        self.ts3.user.is_staff = True
+
+    def test_ts1_permission(self):
+        '''test that ts1 can book one hour'''
+        self.client.force_authenticate(user=self.ts1.user,token=self.get_token(self.ts1.user))
+        url = reverse('hour-list', args=[self.ts1.id])
+        response = self.client.post(url, {'hours': 1, 'day': date.today()})
+        print response.data
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+

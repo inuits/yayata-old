@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, detail_route
 from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
@@ -74,22 +74,6 @@ class TimesheetViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, OwnerOrAdminPermission)
     serializer_class = TimesheetSerializer
 
-   # @detail_route(methods=['PUT'])
-   # def lock(self, request, pk=None):
-   #     """
-   #     Set the lock on a timesheet
-   #     ---
-   #     serializer: LockSerializer
-   #     """
-   #     timesheet = self.get_object()
-   #     serializer = LockSerializer(data=request.data)
-   #     serializer.is_valid()
-   #     if request.user.is_staff or not timesheet.locked:
-   #         timesheet.locked = serializer.data['lock']
-   #         timesheet.save()
-   #     return Response({'locked': timesheet.locked})
-
-
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
@@ -102,6 +86,15 @@ class TimesheetViewSet(viewsets.ModelViewSet):
         return queryset
 
 
+class CustomerViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows customer to be viewed or edited.
+    """
+    permission_classes = (IsAuthenticated,)
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+
+
 class HourViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows hours to be viewed or edited.
@@ -110,11 +103,12 @@ class HourViewSet(viewsets.ModelViewSet):
     queryset = Hour.objects.all()
     serializer_class = HourSerializer
 
-class CustomerViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows customer to be viewed or edited.
-    """
-    permission_classes = (IsAuthenticated,)
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+    def perform_create(self, serializer):
+        serializer.save(timesheet=self.timesheet_pk)
+
+    def create(self, request, *args, **kwargs):
+        if not 'timesheet_pk' in kwargs:
+            raise Exception
+        self.timesheet_pk = Timesheet.objects.get(id=kwargs['timesheet_pk'])
+        return super(HourViewSet,self).create(request, *args, **kwargs)
 
