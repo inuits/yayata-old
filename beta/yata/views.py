@@ -6,7 +6,7 @@ from serializers import UserSerializer, GroupSerializer, CustomerSerializer, Pro
 from models import Customer, Project, Timesheet, Hour, Company
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import obtain_auth_token
-from permissions import OwnerOrAdminPermission
+from permissions import OwnerOrAdminPermission, OwnerOrAdminHourPermission
 
 
 @api_view(['POST'])
@@ -102,6 +102,7 @@ class HourViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
     queryset = Hour.objects.all()
     serializer_class = HourSerializer
+    permission_classes = (IsAuthenticated, OwnerOrAdminHourPermission)
 
     def perform_create(self, serializer):
         serializer.save(timesheet=self.timesheet)

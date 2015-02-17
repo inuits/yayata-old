@@ -145,8 +145,14 @@ class HourTestCase(YataTest):
         self.client.force_authenticate(user=self.ts1.user,token=self.get_token(self.ts1.user))
         url = reverse('hour-list', args=[self.ts1.id])
         response = self.client.post(url, {'hours': 1, 'day': date.today()})
-        print response.data
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_ts2_permission(self):
+        '''test that ts2 can not book one hour on ts1'''
+        self.client.force_authenticate(user=self.ts2.user,token=self.get_token(self.ts2.user))
+        url = reverse('hour-list', args=[self.ts1.id])
+        response = self.client.post(url, {'hours': 1, 'day': date.today()})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
 
