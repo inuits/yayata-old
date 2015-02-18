@@ -54,12 +54,6 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
             },
             function(data){
                 $scope.errors=data.data;
-                resetStyles();
-                for (i = 0; i < $scope.fields.length; i++) {
-                    if ($scope.fields[i] in data.data){
-                        $scope.styles[$scope.fields[i]] = {"color":"red"};
-                    }
-                }
             }
     )};
 
@@ -93,9 +87,10 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
    Hour.get({'tid': $routeParams.timesheetId},
         function(data){ $scope.hours = data; });
     $scope.add = function(){
-        Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.hour),
+        Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.newhour),
                 function(data){
                     $scope.hours.push(data);
+                    $scope.newhour.day = parseInt($scope.newhour.day)+1;
                 });
     }
 }

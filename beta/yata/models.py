@@ -2,6 +2,7 @@ from django.db import models
 from django_countries.fields import CountryField
 from django.contrib.auth.models import Group, User
 from django.core.exceptions import ValidationError
+import calendar
 
 class Customer(models.Model):
     short_name = models.CharField(max_length=5)
@@ -27,18 +28,22 @@ class Company(models.Model):
         return self.name
 
 class Timesheet(models.Model):
-    month = models.DateField()
+    MONTH_CHOICES=[(x, calendar.month_name[x]) for x in xrange(1,12)]
+    month = models.IntegerField(choices=MONTH_CHOICES)
+    year = models.IntegerField()
     project = models.ForeignKey('Project')
     company = models.ForeignKey('Company')
     group = models.ForeignKey(Group,blank=True,null=True)
     user = models.ForeignKey(User,blank=True,null=True)
     locked = models.BooleanField(default=False)
 
+    def get_max_days(self):
+        return calendar.monthrange(self.year,self.month)[1]
+
     def __unicode__(self):
         return "%s - %s - %s" % (self.month, unicode(self.project), unicode(self.user))
 
     def clean(self):
-        self.month = self.month.replace(day = 1)
         if self.user == self.group == None:
             raise ValidationError('A user or a group has to be chosed for this timesheet')
 

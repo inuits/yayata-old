@@ -30,15 +30,15 @@ class TimesheetSerializer(serializers.ModelSerializer):
     group_name = serializers.StringRelatedField(source='group')
     customer_name = serializers.StringRelatedField(source='project.customer')
 
-
     class Meta:
         model = Timesheet
         fields = ('id',
-                'month',
+                'month', 'year',
                 'project', 'project_name', 'customer_name',
                 'company', 'company_name',
                 'group', 'group_name',
-                'user', 'user_name', 'locked')
+                'user', 'user_name', 'locked',
+                'get_max_days')
 
 class HourSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,14 +1,3 @@
-function concatMonth(data){
-    if (data) {
-        month = parseInt(data.monthonly)+1;
-        data.month=data.year+"-" + month + "-01";
-        if (!data.year){delete(data.month);}
-        if (data) {
-            return angular.toJson(data);
-        }
-    }
-}
-
 angular.module('YataServices', ['ngResource', 'ngSanitize']).
 factory('api', function ($http, $cookies, Me, $rootScope) {
     return {
@@ -69,7 +58,7 @@ factory('Timesheet', function($resource){
         query: {method:'GET', url:BetaApiUrl + 'timesheets/', isArray:true},
         update: {method:'PATCH', params:{timesheetId:'@id'}, isArray:false},
         get: {method:'GET', params:{timesheetId:''}},
-        create: {method:'POST', isArray:false, transformRequest:concatMonth}
+        create: {method:'POST', isArray:false}
     });
 }).
 factory('Hour', function($resource){
