@@ -19,7 +19,7 @@
         <tbody>
         <tr data-ng-repeat="hour in hours">
             <td class="col-md-1">{{hour.day}}</td>
-            <td class="col-md-5">{{hour.message}}</td>
+            <td class="col-md-5">{{hour.task}}</td>
             <td class="col-md-1">{{hour.hours}}</td>
             <td class="col-md-1">{{hour.hours150}}</td>
             <td class="col-md-1">{{hour.hours200}}</td>
@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <td class="col-md-1"><input class="form-control" data-ng-model="hour.day"></td>
-            <td class="col-md-5"><input class="form-control" data-ng-model="hour.message"></td>
+            <td class="col-md-5"><input class="form-control" data-ng-model="hour.task"></td>
             <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours"></td>
             <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours150"></td>
             <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours200"></td>
