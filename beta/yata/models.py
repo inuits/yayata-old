@@ -53,5 +53,15 @@ class Hour(models.Model):
     hours150 = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     hours200 = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     hourstravel = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
-    day = models.DateField()
+    day = models.IntegerField()
+    mistaken = models.BooleanField(default=False)
+
+    def clean(self):
+        if self.day > 31 or self.day < 1:
+            self.day = 1
+            self.mistaken = True
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(Hour, self).save(*args, **kwargs)
 

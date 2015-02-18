@@ -18,13 +18,13 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="hour in hours">
-            <td class="col-md-1">{{hour.day}}</td>
-            <td class="col-md-5">{{hour.task}}</td>
-            <td class="col-md-1">{{hour.hours}}</td>
-            <td class="col-md-1">{{hour.hours150}}</td>
-            <td class="col-md-1">{{hour.hours200}}</td>
-            <td class="col-md-1">{{hour.hourstravel}}</td>
-            <td class="col-md-2">
+            <td class="text-center col-md-1">{{hour.day}}</td>
+            <td class="text-center col-md-5">{{hour.task}}</td>
+            <td class="text-center col-md-1">{{hour.hours}}</td>
+            <td class="text-center col-md-1">{{hour.hours150}}</td>
+            <td class="text-center col-md-1">{{hour.hours200}}</td>
+            <td class="text-center col-md-1">{{hour.hourstravel}}</td>
+            <td class="text-center col-md-2">
                 <div class="btn-group">
                     <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
                     <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-retweet"></i></a>
@@ -33,13 +33,13 @@
             </td>
         </tr>
         <tr>
-            <td class="col-md-1"><input class="form-control" data-ng-model="hour.day"></td>
-            <td class="col-md-5"><input class="form-control" data-ng-model="hour.task"></td>
-            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours"></td>
-            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours150"></td>
-            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours200"></td>
-            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hourstravel"></td>
-            <td class="col-md-2">
+            <td class="text-center col-md-1"><input class="form-control" data-ng-model="hour.day"></td>
+            <td class="text-center col-md-5"><input class="form-control" data-ng-model="hour.task"></td>
+            <td class="text-center col-md-1"><input class="form-control" data-ng-model="hour.hours"></td>
+            <td class="text-center col-md-1"><input class="form-control" data-ng-model="hour.hours150"></td>
+            <td class="text-center col-md-1"><input class="form-control" data-ng-model="hour.hours200"></td>
+            <td class="text-center col-md-1"><input class="form-control" data-ng-model="hour.hourstravel"></td>
+            <td class="text-center col-md-2">
             <div class="btn-group">
                 <a class="btn btn-default" data-ng-click="add()"><i class="glyphicon glyphicon-ok-circle"></i></a>
                 <a class="btn btn-default" data-ng-click="hour.day=hour.day+1"><i class="glyphicon glyphicon-forward"></i></a>
@@ -47,6 +47,18 @@
             </td>
         </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td class="text-center col-md-1" data-ng-bind="hours.length"></td>
+            <td class="text-center col-md-5"></td>
+            <td class="text-center col-md-1"></td>
+            <td class="text-center col-md-1"></td>
+            <td class="text-center col-md-1"></td>
+            <td class="text-center col-md-1"></td>
+            <td class="text-center col-md-2">
+            </td>
+        </tr>
+        </tfoot>
     </table>
 
 </div>
