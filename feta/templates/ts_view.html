@@ -4,16 +4,19 @@
         <tr><td>Customer:</td><td>{{timesheet.customer_name}}</td><td>Project:</td><td>{{timesheet.project_name}}</td></tr>
         <tr><td>Month:</td><td>{{timesheet.month}}</td><td>User:</td><td>{{timesheet.user_name}}</td></tr>
     </table>
-    <table class="table">
+    <table class="table table-bordered table-striped">
+        <thead>
         <tr>
-            <td class="col-md-1">Day</td>
-            <td class="col-md-5">Message</td>
-            <td class="col-md-1">100%</td>
-            <td class="col-md-1">150%</td>
-            <td class="col-md-1">200%</td>
-            <td class="col-md-1">Travel</td>
-            <td class="col-md-2">Actions</td>
+            <th class="col-md-1">Day</td>
+            <th class="col-md-5">Message</td>
+            <th class="col-md-1">100%</td>
+            <th class="col-md-1">150%</td>
+            <th class="col-md-1">200%</td>
+            <th class="col-md-1">Travel</td>
+            <th class="col-md-2">Actions</td>
         </tr>
+        </thead>
+        <tbody>
         <tr data-ng-repeat="hour in hours">
             <td class="col-md-1">{{hour.day}}</td>
             <td class="col-md-5">{{hour.message}}</td>
@@ -43,6 +46,7 @@
             </div>
             </td>
         </tr>
+        </tbody>
     </table>
 
 </div>
