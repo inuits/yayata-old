@@ -93,6 +93,9 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
    Hour.get({'tid': $routeParams.timesheetId},
         function(data){ $scope.hours = data; });
     $scope.add = function(){
-        Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.hour));
+        Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.hour),
+                function(data){
+                    $scope.hours.push(data);
+                });
     }
 }
