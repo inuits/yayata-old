@@ -5,9 +5,44 @@
         <tr><td>Month:</td><td>{{timesheet.month}}</td><td>User:</td><td>{{timesheet.user_name}}</td></tr>
     </table>
     <table class="table">
-        <tr><td>Day</td><td>Message</td><td>Hours</td><td>Actions</td></tr>
-        <tr data-ng-repeat="hour in hours"><td>{{hour.day}}</td><td>{{hour.message}}</td><td>{{hour.hours}}</td></tr>
-        <tr><td><input data-ng-model="hour.day"></td><td><input data-ng-model="hour.message"></td><td><input data-ng-model="hour.hours"></td><td><a class="btn btn-default btn-xs" data-ng-click="add()">Add</a></td></tr>
+        <tr>
+            <td class="col-md-1">Day</td>
+            <td class="col-md-5">Message</td>
+            <td class="col-md-1">100%</td>
+            <td class="col-md-1">150%</td>
+            <td class="col-md-1">200%</td>
+            <td class="col-md-1">Travel</td>
+            <td class="col-md-2">Actions</td>
+        </tr>
+        <tr data-ng-repeat="hour in hours">
+            <td class="col-md-1">{{hour.day}}</td>
+            <td class="col-md-5">{{hour.message}}</td>
+            <td class="col-md-1">{{hour.hours}}</td>
+            <td class="col-md-1">{{hour.hours150}}</td>
+            <td class="col-md-1">{{hour.hours200}}</td>
+            <td class="col-md-1">{{hour.hourstravel}}</td>
+            <td class="col-md-2">
+                <div class="btn-group">
+                    <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-retweet"></i></a>
+                    <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-trash"></i></a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-1"><input class="form-control" data-ng-model="hour.day"></td>
+            <td class="col-md-5"><input class="form-control" data-ng-model="hour.message"></td>
+            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours"></td>
+            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours150"></td>
+            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hours200"></td>
+            <td class="col-md-1"><input class="form-control" data-ng-model="hour.hourstravel"></td>
+            <td class="col-md-2">
+            <div class="btn-group">
+                <a class="btn btn-default" data-ng-click="add()"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                <a class="btn btn-default" data-ng-click="hour.day=hour.day+1"><i class="glyphicon glyphicon-forward"></i></a>
+            </div>
+            </td>
+        </tr>
     </table>
 
 </div>
