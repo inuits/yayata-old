@@ -49,9 +49,9 @@ class Timesheet(models.Model):
 class Hour(models.Model):
     timesheet = models.ForeignKey('Timesheet')
     task = models.CharField(max_length=80, blank=True)
-    hours = models.DecimalField(max_digits=4, decimal_places=2)
-    hours150 = models.DecimalField(max_digits=4, decimal_places=2)
-    hours200 = models.DecimalField(max_digits=4, decimal_places=2)
-    hourstravel = models.DecimalField(max_digits=4, decimal_places=2)
+    hours = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    hours150 = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    hours200 = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
+    hourstravel = models.DecimalField(max_digits=4, decimal_places=2, null=True, blank=True)
     day = models.DateField()
 
