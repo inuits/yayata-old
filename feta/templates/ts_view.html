@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr data-ng-repeat="hour in hours">
+        <tr data-ng-repeat="hour in hours|orderBy:['day','id']">
             <td class="text-center col-md-1">{{hour.day}}</td>
             <td class="text-center col-md-5">{{hour.task}}</td>
             <td class="text-center col-md-1">{{hour.hours}}</td>
