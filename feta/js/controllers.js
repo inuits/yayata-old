@@ -82,15 +82,25 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
 }
 
 function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
-   Timesheet.get({'timesheetId': $routeParams.timesheetId},
-        function(data){ $scope.timesheet = data; });
-   Hour.get({'tid': $routeParams.timesheetId},
-        function(data){ $scope.hours = data; });
+    Timesheet.get({'timesheetId': $routeParams.timesheetId},
+            function(data){ $scope.timesheet = data; });
+    Hour.get({'tid': $routeParams.timesheetId},
+            function(data){ $scope.hours = data; });
     $scope.add = function(){
         Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.newhour),
-                function(data){
-                    $scope.hours.push(data);
-                    $scope.newhour.day = parseInt($scope.newhour.day)+1;
-                });
+            function(data){
+                $scope.hours.push(data);
+                $scope.newhour.day = parseInt($scope.newhour.day)+1;
+            }
+        );
+    }
+    $scope.delete = function(hour){
+        console.log('foo');
+        Hour.delete({timesheet: $scope.timesheet.id, hour: hour.id},
+            function(data){
+                var idx = $scope.hours.indexOf(hour);
+                $scope.hours.splice(idx,1)
+            }
+        );
     }
 }
