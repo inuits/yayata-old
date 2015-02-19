@@ -26,23 +26,23 @@
             <td class="text-center col-md-1">{{hour.hourstravel}}</td>
             <td class="text-center col-md-2">
                 <div class="btn-group">
-                    <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
-                    <a class="btn btn-default" data-ng-click="delete()"><i class="glyphicon glyphicon-retweet"></i></a>
-                    <a class="btn btn-default" data-ng-click="delete(hour)"><i class="glyphicon glyphicon-trash"></i></a>
+                    <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-retweet"></i></a>
+                    <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete(hour)"><i class="glyphicon glyphicon-trash"></i></a>
                 </div>
             </td>
         </tr>
         <tr>
-            <td class="text-center col-md-1"><input class="form-control" data-ng-model="newhour.day"></td>
-            <td class="text-center col-md-5"><input class="form-control" data-ng-model="newhour.task"></td>
-            <td class="text-center col-md-1"><input class="form-control" data-ng-model="newhour.hours"></td>
-            <td class="text-center col-md-1"><input class="form-control" data-ng-model="newhour.hours150"></td>
-            <td class="text-center col-md-1"><input class="form-control" data-ng-model="newhour.hours200"></td>
-            <td class="text-center col-md-1"><input class="form-control" data-ng-model="newhour.hourstravel"></td>
+            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.day"></td>
+            <td class="text-center col-md-5"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.task"></td>
+            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours"></td>
+            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours150"></td>
+            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours200"></td>
+            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hourstravel"></td>
             <td class="text-center col-md-2">
             <div class="btn-group">
-                <a class="btn btn-default" data-ng-click="add()"><i class="glyphicon glyphicon-ok-circle"></i></a>
-                <a class="btn btn-default" data-ng-click="newhour.day=newhour.day+1"><i class="glyphicon glyphicon-forward"></i></a>
+                <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="add()"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="newhour.day=newhour.day+1"><i class="glyphicon glyphicon-forward"></i></a>
             </div>
             </td>
         </tr>
@@ -56,6 +56,13 @@
             <td class="text-center col-md-1"></td>
             <td class="text-center col-md-1"></td>
             <td class="text-center col-md-2">
+                <a data-ng-click="lock(timesheet)" data-ng-class="{
+                    'btn':true,
+                    'btn-default': !timesheet.locked,
+                    'btn-warning': timesheet.locked,
+                    'disabled': timesheet.locked && !$root.user.is_staff}">
+                    <i class="glyphicon glyphicon-lock"></i>
+                </a>
             </td>
         </tr>
         </tfoot>

@@ -102,4 +102,11 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
             }
         );
     }
+    $scope.lock = function(timesheet){
+        Timesheet.update({'id': timesheet.id, 'locked': !timesheet.locked}).$promise.then(
+            function(data){
+                timesheet.locked = data.locked;
+            }
+            )
+    }
 }
