@@ -95,7 +95,6 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
         );
     }
     $scope.delete = function(hour){
-        console.log('foo');
         Hour.delete({timesheet: $scope.timesheet.id, hour: hour.id},
             function(data){
                 var idx = $scope.hours.indexOf(hour);
