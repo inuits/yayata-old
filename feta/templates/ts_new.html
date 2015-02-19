@@ -29,7 +29,7 @@
             <label class="control-label col-sm-2" for="customer">Customer</label>
             <div class="col-sm-10">
                 <select class="form-control" data-ng-model="selectedcustomer">
-                    <option data-ng-repeat="c in customers" value="{{c.id}}">{{c.name}}</option>
+                    <option data-ng-repeat="c in customers|orderBy:['name','id']" value="{{c.id}}">{{c.name}}</option>
                 </select>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <label class="control-label col-sm-2" for="project">Project</label>
             <div class="col-sm-10">
                 <select class="form-control" data-ng-model="timesheet.project">
-                    <option data-ng-repeat="p in projects|filter:{'customer': selectedcustomer}" value="{{p.id}}">{{p.name}}</option>
+                    <option data-ng-repeat="p in projects|filter:{'customer': selectedcustomer}|orderBy:['name','id']" value="{{p.id}}">{{p.name}}</option>
                 </select>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <label class="control-label col-sm-2" for="company">Company</label>
             <div class="col-sm-10">
                 <select class="form-control" data-ng-model="timesheet.company">
-                    <option data-ng-repeat="c in companies" value="{{c.id}}">{{c.name}}</option>
+                    <option data-ng-repeat="c in companies|orderBy:['name','id']" value="{{c.id}}">{{c.name}}</option>
                 </select>
             </div>
         </div>
