@@ -28,16 +28,16 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="customer">Customer</label>
             <div class="col-sm-10">
-                <select class="form-control" data-ng-model="customer.id">
+                <select class="form-control" data-ng-model="selectedcustomer">
                     <option data-ng-repeat="c in customers" value="{{c.id}}">{{c.name}}</option>
                 </select>
             </div>
         </div>
         <div data-ng-class="{'form-group': true, 'has-error': errors.project}">
-            <label class="control-label col-sm-2" for="customer">Project</label>
+            <label class="control-label col-sm-2" for="project">Project</label>
             <div class="col-sm-10">
                 <select class="form-control" data-ng-model="timesheet.project">
-                    <option data-ng-repeat="p in projects|filter:customer" value="{{p.id}}">{{p.name}}</option>
+                    <option data-ng-repeat="p in projects|filter:{'customer': selectedcustomer}" value="{{p.id}}">{{p.name}}</option>
                 </select>
             </div>
         </div>
