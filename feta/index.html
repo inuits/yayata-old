@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>YAYATA</title>
+<!--        <title>YAYATA</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/bootstrap-theme.css" />
+        <link rel="stylesheet" href="css/bootstrap-theme.css" />-->
+        <link rel="stylesheet" href="css/cascade.css" />
         <link rel="stylesheet" href="css/app.css" />
         <script src="js/angular.js"></script>
         <script src="js/angular-resource.min.js"></script>
@@ -17,31 +18,39 @@
         <script src="js/app.js"></script>
         <base href="http://127.0.0.1:8080/" />
     </head>
-    <body data-ng-app="Yata">
-
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#/">Yayata</a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+    <body data-ng-app="Yata" class="narrow">
+    <div class="site-center">
+        <div class="site-body">
+            <div class="site-header">
+                <div class="col width-fill mobile-width-fill">
+                    <div class="cell">
+                        <ul class="col nav">
                     <li><a href="#/timesheets">Timesheets</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
                     <li><a data-ng-if="$root.user.id" href="#/logout">Log Out ({{$root.user.username}})</a></li>
-                </ul>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
+            <div class="cell">
+                <div class="col">
+                    <div class="cell panel" data-ng-repeat="error in $root.errors" data-ng-show="!hide">
+                        <div class="header background-red">
+                            <a class="icon icon-16 icon-remove-sign color-white float-right"  data-ng-click="hide=true"></a>
+                            Error {{error.code}}
+                        </div>
+                        <div class="body">
+                            <div class="col">
+                                <div class="cell">
+                                    <span class="icon icon-16 icon-warning-sign color-red float-left"></span>
+                                    {{error.message}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" data-ng-view></div>
+                </div>
         </div>
-    </nav>
-    <div class="container" data-ng-repeat="error in $root.errors" data-ng-show="!hide">
-        <div class="alert alert-danger alert-dismissible">
-              <button type="button" class="close" data-ng-click="hide=true"><span>&times;</span></button>
-              <strong>Error {{error.code}}</strong> {{error.message}}
-            </div>
     </div>
-    <div class="content" data-ng-view></div>
     </body>
 </html>

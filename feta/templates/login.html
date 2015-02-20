@@ -1,5 +1,21 @@
+<div class="cell">    
+<h1>Login</h1>
+</div>
+<div class="cell panel">
+    <div class="header background-red">
+        <a class="icon icon-16 icon-remove-sign color-white float-right"  data-ng-click="hide=true"></a>
+        Error {{error.code}}
+    </div>
+    <div class="body">
+        <div class="col">
+            <div class="cell">
+                <span class="icon icon-16 icon-warning-sign color-red float-left"></span>
+                {{error.message}}
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
-    <h1>Login</h1>
     <form>
         <div class="alert alert-info" ng-if="use_cookies">The remember me option is enabled, so your api key will be stored in a cookie.</div>
         <div class="alert alert-danger" data-ng-repeat="message in errors.non_field_errors">
