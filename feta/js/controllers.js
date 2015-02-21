@@ -25,9 +25,12 @@ function LogoutCtrl($scope, $location, api, $cookieStore) {
 
 function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     $scope.use_cookies = false;
+    $scope.submitted = false;
 
     $scope.login = function(){
+        $scope.submitted = true;
         login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
+            $scope.submitted = false;
             api.init(data['token']);
             if ($scope.use_cookies){
                 $cookies['token'] = data['token'];
@@ -35,6 +38,7 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
             $location.path('/');
         },
         function (data){
+            $scope.submitted = false;
             $scope.errors=data.data;
             api.init();
         }

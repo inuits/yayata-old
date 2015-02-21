@@ -1,38 +1,50 @@
-<div class="container">
-    <h1>Timesheets</h1>
-    <a class="btn btn-primary" href="#/timesheet/new">New Timesheet</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Month</th>
-                <th>Customer</th>
-                <th>Project</th>
-                <th>Company</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="timesheet in timesheets">
-            <td>{{timesheet.id}}</td>
-            <td>{{timesheet.month}}</td>
-            <td>{{timesheet.customer_name}}</td>
-            <td>{{timesheet.project_name}}</td>
-            <td>{{timesheet.company_name}}</td>
-            <td>
-                <div class="btn-group">
-                    <a class="btn btn-xs btn-default" data-ng-click="open(timesheet.id)"><i class="glyphicon glyphicon-folder-open"></i></a>
-                    <a data-ng-click="lock(timesheet)" data-ng-class="{
-                        'btn':true,
-                        'btn-xs':true,
-                        'btn-default': !timesheet.locked,
-                        'btn-warning': timesheet.locked,
-                        'disabled': timesheet.locked && !$root.user.is_staff}">
-                        <i class="glyphicon glyphicon-lock"></i>
-                    </a>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div class="cell">
+    <div class="col">
+        <div class="cell">
+            <h1>Timesheets</h1>
+        </div>
+        <div class="col">
+            <div class="cell">
+                <a class="button" href="#/timesheet/new">New Timesheet</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="cell">
+            <table class="horizontal-border outline-header">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Month</th>
+                        <th>Customer</th>
+                        <th>Project</th>
+                        <th>Company</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="timesheet in timesheets">
+                    <td>{{timesheet.id}}</td>
+                    <td>{{timesheet.month}}</td>
+                    <td>{{timesheet.customer_name}}</td>
+                    <td>{{timesheet.project_name}}</td>
+                    <td>{{timesheet.company_name}}</td>
+                    <td>
+                        <div class="button-group">
+                            <a class="button icon-button" data-ng-click="open(timesheet.id)"><span class="icon icon-folder-open"></span></a>
+                            <a data-ng-click="lock(timesheet)" data-ng-class="{
+                                'button icon-button': true,
+                                'background-orange': timesheet.locked}">
+                                <span data-ng-class="{
+                                    'icon-lock icon': !timesheet.locked,
+                                    'icon-unlock icon': timesheet.locked && $root.user.is_staff,
+                                    'icon-lock icon ': timesheet.locked && !$root.user.is_staff}"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

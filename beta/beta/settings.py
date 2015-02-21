@@ -132,3 +132,4 @@ SWAGGER_SETTINGS = {
     'doc_expansion': 'none',
 }
 
+BAD_LOGIN_SLEEP_TIME = 3

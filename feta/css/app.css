@@ -255,3 +255,7 @@
         right: 0;
     }
 }
+
+input.invalid{
+    border-color: #9d261d;
+}
