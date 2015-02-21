@@ -4,6 +4,8 @@ from django.contrib import admin
 from rest_framework_nested import routers as nested_routers
 from yata import views
 
+handler500 = 'yata.views.error_500'
+
 router = routers.SimpleRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)

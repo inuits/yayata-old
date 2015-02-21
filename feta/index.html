@@ -39,7 +39,7 @@
                             <a class="icon icon-16 icon-remove-sign color-white float-right"  data-ng-click="hide=true"></a>
                             Error {{error.code}}
                         </div>
-                        <div class="body">
+                        <div class="body" data-ng-if="error.message">
                             <div class="col">
                                 <div class="cell">
                                     <span class="icon icon-16 icon-warning-sign color-red float-left"></span>

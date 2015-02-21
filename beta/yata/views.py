@@ -1,7 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, detail_route
+#from rest_framework.decorators import api_view, detail_route
+from rest_framework.decorators import api_view
 from rest_framework import status
 from serializers import UserSerializer, GroupSerializer, CustomerSerializer, ProjectSerializer, CompanySerializer, TimesheetSerializer, HourSerializer
 from models import Customer, Project, Timesheet, Hour, Company
@@ -10,7 +11,13 @@ from rest_framework.authtoken.views import obtain_auth_token
 from permissions import OwnerOrAdminPermission, OwnerOrAdminHourPermission
 from django.conf import settings
 from time import sleep
+from django.http import HttpResponse
 
+def error_500(request):
+    # check request header
+    r = HttpResponse( '{"detail":""}')
+    r.status_code = 500
+    return r
 
 @api_view(['POST'])
 def token_view(request):
