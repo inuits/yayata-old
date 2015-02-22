@@ -18,12 +18,12 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="hour in hours|orderBy:['day','id']">
-            <td class="text-center col-md-1">{{hour.day}}</td>
-            <td class="text-center col-md-5">{{hour.task}}</td>
-            <td class="text-center col-md-1">{{hour.hours}}</td>
-            <td class="text-center col-md-1">{{hour.hours150}}</td>
-            <td class="text-center col-md-1">{{hour.hours200}}</td>
-            <td class="text-center col-md-1">{{hour.hourstravel}}</td>
+            <td class="text-center ">{{hour.day}}</td>
+            <td class="text-center width-fill">{{hour.task}}</td>
+            <td class="text-center ">{{hour.hours}}</td>
+            <td class="text-center ">{{hour.hours150}}</td>
+            <td class="text-center ">{{hour.hours200}}</td>
+            <td class="text-center ">{{hour.hourstravel}}</td>
             <td class="text-center col-md-2">
                 <div class="btn-group">
                     <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
@@ -33,21 +33,31 @@
             </td>
         </tr>
         <tr>
-            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.day"></td>
-            <td class="text-center col-md-5"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.task"></td>
-            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours"></td>
-            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours150"></td>
-            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours200"></td>
-            <td class="text-center col-md-1"><input data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hourstravel"></td>
+            <td class="text-center col-md-1">
+                <input placeholder="Day" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.day">
+            </td>
+            <td class="text-center col-md-5">
+                <input placeholder="What are you doing?" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.task">
+            </td>
+            <td class="text-center col-md-1">
+                <input placeholder="100%" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours">
+            </td>
+            <td class="text-center col-md-1">
+                <input placeholder="150%" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours150">
+            </td>
+            <td class="text-center col-md-1">
+                <input placeholder="200%" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours200">
+            </td>
+            <td class="text-center col-md-1">
+                <input placeholder="Travel" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hourstravel">
+            </td>
             <td class="text-center col-md-2">
-            <div class="btn-group">
-                <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="add()"><i class="glyphicon glyphicon-ok-circle"></i></a>
+            <div class="bouton-group">
+                <a data-ng-class="{'button': true, 'button-icon': true, 'disabled': timesheet.locked}" data-ng-click="add()"><span class="icon icon-plus"></span></a>
                 <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="newhour.day=newhour.day+1"><i class="glyphicon glyphicon-forward"></i></a>
             </div>
             </td>
         </tr>
-        </tbody>
-        <tfoot>
         <tr>
             <td class="text-center col-md-1" data-ng-bind="hours.length + ' entries'"></td>
             <td class="text-center col-md-5"></td>
@@ -65,7 +75,7 @@
                 </a>
             </td>
         </tr>
-        </tfoot>
+        </tbody>
     </table>
 
 </div>
