@@ -113,7 +113,6 @@ class HourViewSet(viewsets.ModelViewSet):
     API endpoint that allows hours to be viewed or edited.
     """
     permission_classes = (IsAuthenticated,)
-    queryset = Hour.objects.all()
     serializer_class = HourSerializer
     permission_classes = (IsAuthenticated, OwnerOrAdminHourPermission)
 
@@ -126,3 +125,6 @@ class HourViewSet(viewsets.ModelViewSet):
         self.timesheet = Timesheet.objects.get(id=kwargs['timesheet_pk'])
         return super(HourViewSet,self).create(request, *args, **kwargs)
 
+    def get_queryset(self):
+        timesheet_obj = Timesheet.objects.get(id=int(self.request.parser_context['kwargs']['timesheet_pk']))
+        return Hour.objects.filter(timesheet=timesheet_obj)

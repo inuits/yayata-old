@@ -15,7 +15,7 @@ router.register(r'customers', views.CustomerViewSet)
 router.register(r'timesheets', views.TimesheetViewSet, base_name='timesheet')
 
 nested_router = nested_routers.NestedSimpleRouter(router, r'timesheets', lookup='timesheet')
-nested_router.register(r'hours', views.HourViewSet)
+nested_router.register(r'hours', views.HourViewSet, base_name='hour')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
