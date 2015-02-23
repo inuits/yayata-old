@@ -9,3 +9,5 @@ djangorestframework==3.0.4
 shortuuid==0.4.2
 six==1.9.0
 wsgiref==0.1.2
+#
+drf-nested-routers==0.9.0
