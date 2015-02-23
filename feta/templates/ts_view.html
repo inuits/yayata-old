@@ -53,8 +53,8 @@
             </td>
             <td class="text-center col-md-2">
             <div class="bouton-group">
-                <a data-ng-class="{'button': true, 'button-icon': true, 'disabled': timesheet.locked}" data-ng-click="add()"><span class="icon icon-plus"></span></a>
-                <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="newhour.day=newhour.day+1"><i class="glyphicon glyphicon-forward"></i></a>
+                <a data-ng-class="{'background-grey': timesheet.locked}" data-ng-click="add()"><span class="icon icon-plus"></span></a>
+                <a data-ng-class="{'background-grey': timesheet.locked}" data-ng-click="newhour.day=newhour.day+1"><span class="icon icon-forward"></span></a>
             </div>
             </td>
         </tr>
@@ -67,11 +67,9 @@
             <td class="text-center col-md-1"></td>
             <td class="text-center col-md-2">
                 <a data-ng-click="lock(timesheet)" data-ng-class="{
-                    'btn':true,
-                    'btn-default': !timesheet.locked,
-                    'btn-warning': timesheet.locked,
+                    'background-orange': timesheet.locked,
                     'disabled': timesheet.locked && !$root.user.is_staff}">
-                    <i class="glyphicon glyphicon-lock"></i>
+                    <span data-ng-class="{'icon':true, 'icon-lock':timesheet.locked, 'icon-unlock': !timesheet.locked}"></span
                 </a>
             </td>
         </tr>
