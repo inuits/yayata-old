@@ -12,7 +12,7 @@ TODO
 * Implement administration part
 * Export to PDF
 * Example configuration
-* Package the python dependecies for EL7
+* Package the python dependencies for EL7
 * Write more tests
 * Document the API
 * ...
