@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<!--        <title>YAYATA</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/bootstrap-theme.css" />-->
+        <link rel="stylesheet" href="css/cascade.css" />
+        <link rel="stylesheet" href="css/app.css" />
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.min.js"></script>
+        <script src="js/angular-route.min.js"></script>
+        <script src="js/angular-cookies.min.js"></script>
+        <script src="js/angular-sanitize.min.js"></script>
+        <script src="settings.js"></script>
+        <script src="js/controllers.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/urls.js"></script>
+        <script src="js/app.js"></script>
+        <base href="http://127.0.0.1:8080/" />
+    </head>
+    <body data-ng-app="Yata" class="narrow">
+    <div class="site-center">
+        <div class="site-body">
+            <div class="site-header">
+                <div class="col width-fill mobile-width-fill">
+                    <div class="cell">
+                        <ul class="col nav">
+                    <li><a href="#/timesheets">Timesheets</a></li>
+                    <li><a data-ng-if="$root.user.id" href="#/logout">Log Out ({{$root.user.username}})</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cell">
+                <div class="col">
+                    <div class="cell panel" data-ng-repeat="error in $root.errors" data-ng-show="!hide">
+                        <div class="header background-red">
+                            <a class="icon icon-16 icon-remove-sign color-white float-right"  data-ng-click="hide=true"></a>
+                            Error {{error.code}}
+                        </div>
+                        <div class="body" data-ng-if="error.message">
+                            <div class="col">
+                                <div class="cell">
+                                    <span class="icon icon-16 icon-warning-sign color-red float-left"></span>
+                                    {{error.message}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" data-ng-view></div>
+                </div>
+        </div>
+    </div>
+    </body>
+</html>

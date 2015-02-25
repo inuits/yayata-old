@@ -1,0 +1,46 @@
+!!!5
+
+%html
+  %head
+    %title YAYATA
+    %link{rel: 'stylesheet', href: 'css/cascade.css'}
+    %link{rel: 'stylesheet', href: 'css/cascade.css'}
+    %link{rel: 'stylesheet', href: 'css/app.css'}
+    %script{src:'js/angular.js'}
+    %script{src:'js/angular-resource.min.js'}
+    %script{src:'js/angular-route.min.js'}
+    %script{src:'js/angular-cookies.min.js'}
+    %script{src:'js/angular-sanitize.min.js'}
+    %script{src:'settings.js'}
+    %script{src:'js/controllers.js'}
+    %script{src:'js/services.js'}
+    %script{src:'js/urls.js'}
+    %script{src:'js/app.js'}
+%body.narrow{'data-ng-app': 'Yata'}
+  .site-center
+    .site-body
+      .site-header
+        .col.width-fill.mobile-width-fill
+          .cell
+            .col.cav
+              %ul.col.nav
+                %li
+                  %a{'href': '#/timesheets'} Timesheets
+                %li
+                  %a{'data-ng-if': '$root.user.id', 'href': '#/logout'}
+                    Log Out ({{$root.user.username}})
+      .col
+        .cell
+          .col
+            .cell.panel{'data-ng-repeat':'error in $root.errors', 'data-ng-show':'!hide'}
+              .header.background-red
+                %a.icon.icon-16.icon-remove-sign.color-white.float-right{'data-ng-click':'hide=true'}
+                Error {{error.code}}
+              .body{'data-ng-if':'error.message'}
+                .col
+                  .cell
+                    %span.icon.icon-16.icon-warning-sign.color-red.float-left
+                    .col
+                      .cell
+                        {{error.message}}
+      .col{'data-ng-view':''}

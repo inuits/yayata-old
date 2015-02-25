@@ -1,1 +1,5 @@
 settings.js
+bin
+lib64
+lib
+include
