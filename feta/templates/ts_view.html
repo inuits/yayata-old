@@ -8,13 +8,13 @@
     <table class="datasheet">
         <thead>
         <tr>
-            <th class="col-md-1">Day</td>
-            <th class="col-md-5">Message</td>
-            <th class="col-md-1">100%</td>
-            <th class="col-md-1">150%</td>
-            <th class="col-md-1">200%</td>
-            <th class="col-md-1">Travel</td>
-            <th class="col-md-2">Actions</td>
+            <th>Day</td>
+            <th>Message</td>
+            <th>100%</td>
+            <th>150%</td>
+            <th>200%</td>
+            <th>Travel</td>
+            <th>Actions</td>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +25,7 @@
             <td class="text-center ">{{hour.hours150}}</td>
             <td class="text-center ">{{hour.hours200}}</td>
             <td class="text-center ">{{hour.hourstravel}}</td>
-            <td class="text-center col-md-2">
+            <td class="text-center ">
                 <div class="btn-group">
                     <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
                     <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-retweet"></i></a>
@@ -34,25 +34,25 @@
             </td>
         </tr>
         <tr>
-            <td class="text-center col-md-1">
+            <td class="text-center ">
                 <input placeholder="Day" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.day">
             </td>
-            <td class="text-center col-md-5">
+            <td class="text-center ">
                 <input placeholder="What are you doing?" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.task">
             </td>
-            <td class="text-center col-md-1">
+            <td class="text-center ">
                 <input placeholder="100%" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours">
             </td>
-            <td class="text-center col-md-1">
+            <td class="text-center ">
                 <input placeholder="150%" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours150">
             </td>
-            <td class="text-center col-md-1">
+            <td class="text-center ">
                 <input placeholder="200%" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hours200">
             </td>
-            <td class="text-center col-md-1">
+            <td class="text-center ">
                 <input placeholder="Travel" data-ng-disabled="timesheet.locked" class="form-control" data-ng-model="newhour.hourstravel">
             </td>
-            <td class="text-center col-md-2">
+            <td class="text-center ">
             <div class="bouton-group">
                 <a data-ng-class="{'background-grey': timesheet.locked}" data-ng-click="add()"><span class="icon icon-plus"></span></a>
                 <a data-ng-class="{'background-grey': timesheet.locked}" data-ng-click="newhour.day=newhour.day+1"><span class="icon icon-forward"></span></a>
@@ -60,13 +60,13 @@
             </td>
         </tr>
         <tr>
-            <td class="text-center col-md-1" data-ng-bind="hours.length + ' entries'"></td>
-            <td class="text-center col-md-5"></td>
-            <td class="text-center col-md-1"></td>
-            <td class="text-center col-md-1"></td>
-            <td class="text-center col-md-1"></td>
-            <td class="text-center col-md-1"></td>
-            <td class="text-center col-md-2">
+            <td class="text-center " data-ng-bind="hours.length + ' entries'"></td>
+            <td class="text-center "></td>
+            <td class="text-center "></td>
+            <td class="text-center "></td>
+            <td class="text-center "></td>
+            <td class="text-center "></td>
+            <td class="text-center ">
                 <a data-ng-click="lock(timesheet)" data-ng-class="{
                     'background-orange': timesheet.locked,
                     'disabled': timesheet.locked && !$root.user.is_staff}">
