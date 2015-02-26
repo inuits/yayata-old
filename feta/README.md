@@ -2,6 +2,8 @@
 
 This project uses HAML instead of HTML.
 
+It is made with AngularJS
+
 
     virtualenv .
     . bin/activate
