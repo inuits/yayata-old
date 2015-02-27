@@ -1,50 +1,57 @@
-<div class="cell">
-    <div class="col">
-        <div class="cell">
-            <h1>Timesheets</h1>
-        </div>
-        <div class="col">
-            <div class="cell">
-                <a class="button" href="#/timesheet/new">New Timesheet</a>
-            </div>
-        </div>
+<div class='cell'>
+  <div class='col'>
+    <div class='cell'>
+      <h1>Timesheets</h1>
     </div>
-    <div class="col">
-        <div class="cell">
-            <table class="horizontal-border outline-header">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Month</th>
-                        <th>Customer</th>
-                        <th>Project</th>
-                        <th>Company</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="timesheet in timesheets">
-                    <td>{{timesheet.id}}</td>
-                    <td>{{timesheet.month}}</td>
-                    <td>{{timesheet.customer_name}}</td>
-                    <td>{{timesheet.project_name}}</td>
-                    <td>{{timesheet.company_name}}</td>
-                    <td>
-                        <div class="button-group">
-                            <a class="button icon-button" data-ng-click="open(timesheet.id)"><span class="icon icon-folder-open"></span></a>
-                            <a data-ng-click="lock(timesheet)" data-ng-class="{
-                                'button icon-button': true,
-                                'background-orange': timesheet.locked}">
-                                <span data-ng-class="{
-                                    'icon-lock icon': !timesheet.locked,
-                                    'icon-unlock icon': timesheet.locked && $root.user.is_staff,
-                                    'icon-lock icon ': timesheet.locked && !$root.user.is_staff}"></span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class='col'>
+      <div class='cell'>
+        <a class='button' href='#/timesheet/new'>New Timesheet</a>
+      </div>
     </div>
+    <div class='col'>
+      <div class='cell'>
+        <table class='horizontal-border outline-header'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Month</th>
+              <th>Customer</th>
+              <th>Project</th>
+              <th>Company</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-ng-repeat='timesheet in timesheets'>
+              <td>
+                {{timesheet.id}}
+              </td>
+              <td>
+                {{timesheet.month}}
+              </td>
+              <td>
+                {{timesheet.customer_name}}
+              </td>
+              <td>
+                {{timesheet.project_name}}
+              </td>
+              <td>
+                {{timesheet.company_name}}
+              </td>
+              <td>
+                <div class='button-group'>
+                  <a class='button icon-button' data-ng-click='open(timesheet.id)'>
+                    <span class='icon icon-folder-open'></span>
+                  </a>
+                  <a data-ng-click='lock(timesheet)' data-ng-class='{"button icon-button": true, "background-orange": timesheet.locked}'>
+                    <span data-ng-class='{"icon-lock icon": !timesheet.locked, "icon-unlock icon": timesheet.locked && $root.user.is_staff, "icon-lock icon ": timesheet.locked && !$root.user.is_staff}'></span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

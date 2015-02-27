@@ -1,0 +1,37 @@
+.cell
+  .col
+    .cell
+      %h1 Timesheets
+    .col
+      .cell
+        %a{class: 'button', href: '#/timesheet/new'} New Timesheet
+    .col
+      .cell
+        %table.horizontal-border.outline-header
+          %thead
+            %tr
+              %th #
+              %th Month
+              %th Customer
+              %th Project
+              %th Company
+              %th Actions
+          %tbody
+            %tr{'data-ng-repeat': 'timesheet in timesheets'}
+              %td
+                {{timesheet.id}}
+              %td
+                {{timesheet.month}}
+              %td
+                {{timesheet.customer_name}}
+              %td
+                {{timesheet.project_name}}
+              %td
+                {{timesheet.company_name}}
+              %td
+                .button-group
+                  %a.button.icon-button{'data-ng-click': 'open(timesheet.id)'}
+                    %span.icon.icon-folder-open
+                  %a{'data-ng-click': 'lock(timesheet)', 'data-ng-class': '{"button icon-button": true, "background-orange": timesheet.locked}'
+                  }
+                    %span{'data-ng-class': '{"icon-lock icon": !timesheet.locked, "icon-unlock icon": timesheet.locked && $root.user.is_staff, "icon-lock icon ": timesheet.locked && !$root.user.is_staff}'}
