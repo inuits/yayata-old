@@ -13,117 +13,119 @@
 </div>
 <div class='cell panel'>
   <div class='body'>
-    <div class='cell'>
-      <div class='col'>
-        <div class='col width-1of4'>
-          <div class='cell'>
-            <label>Month</label>
-          </div>
-        </div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <select data-ng-class='{"invalid": errors.month}' data-ng-model='timesheet.month'>
-              <option data-ng-repeat='(i, m) in month' value='{{i}}'>
-                {{m}}
-              </option>
-            </select>
-            <select data-ng-class='{"invalid": errors.year}' data-ng-model='timesheet.year'>
-              <option data-ng-repeat='y in years' value='{{y}}'>
-                {{y}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class='col' data-ng-if='errors.month||errors.year'>
-        <div class='col width-1of4'></div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <div class='label background-red' data-ng-repeat='message in errors.month'>
-              Month: {{message}}
+    <form>
+      <div class='cell'>
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Month</label>
             </div>
-            <div class='label background-red' data-ng-repeat='message in errors.year'>
-              Year: {{message}}
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <select data-ng-class='{"invalid": errors.month}' data-ng-model='timesheet.month'>
+                <option data-ng-repeat='(i, m) in month' value='{{i}}'>
+                  {{m}}
+                </option>
+              </select>
+              <select data-ng-class='{"invalid": errors.year}' data-ng-model='timesheet.year'>
+                <option data-ng-repeat='y in years' value='{{y}}'>
+                  {{y}}
+                </option>
+              </select>
             </div>
           </div>
         </div>
-      </div>
-      <div class='col'>
-        <div class='col width-1of4'>
-          <div class='cell'>
-            <label>Customer</label>
+        <div class='col' data-ng-if='errors.month||errors.year'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <div class='label background-red' data-ng-repeat='message in errors.month'>
+                Month: {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.year'>
+                Year: {{message}}
+              </div>
+            </div>
           </div>
         </div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <select data-ng-model='selectedcustomer'>
-              <option data-ng-repeat='c in customers|orderBy:["name","id"]' value='{{c.id}}'>
-                {{c.name}}
-              </option>
-            </select>
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Customer</label>
+            </div>
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <select data-ng-model='selectedcustomer'>
+                <option data-ng-repeat='c in customers|orderBy:["name","id"]' value='{{c.id}}'>
+                  {{c.name}}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
-      <div class='col'>
-        <div class='col width-1of4'>
-          <div class='cell'>
-            <label>Project</label>
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Project</label>
+            </div>
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <select data-ng-class='{"invalid": errors.project}' data-ng-model='timesheet.project'>
+                <option data-ng-repeat='p in projects|filter:{"customer": selectedcustomer}|orderBy:["name","id"]' value='{{p.id}}'>
+                  {{p.name}}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <select data-ng-class='{"invalid": errors.project}' data-ng-model='timesheet.project'>
-              <option data-ng-repeat='p in projects|filter:{"customer": selectedcustomer}|orderBy:["name","id"]' value='{{p.id}}'>
-                {{p.name}}
-              </option>
-            </select>
+        <div class='col' data-ng-if='errors.project'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <div class='label background-red' data-ng-repeat='message in errors.project'>
+                {{message}}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class='col' data-ng-if='errors.project'>
-        <div class='col width-1of4'></div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <div class='label background-red' data-ng-repeat='message in errors.project'>
-              {{message}}
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Company</label>
+            </div>
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <select data-ng-class='{"invalid": errors.company}' data-ng-model='timesheet.company'>
+                <option data-ng-repeat='c in companies|orderBy:["name","id"]' value='{{c.id}}'>
+                  {{c.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class='col' data-ng-if='errors.company'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <div class='label background-red' data-ng-repeat='message in errors.company'>
+                {{message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <input class='btn btn-primary' data-ng-click='create()' type='submit' value='Submit' />
             </div>
           </div>
         </div>
       </div>
-      <div class='col'>
-        <div class='col width-1of4'>
-          <div class='cell'>
-            <label>Company</label>
-          </div>
-        </div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <select data-ng-class='{"invalid": errors.company}' data-ng-model='timesheet.company'>
-              <option data-ng-repeat='c in companies|orderBy:["name","id"]' value='{{c.id}}'>
-                {{c.name}}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class='col' data-ng-if='errors.company'>
-        <div class='col width-1of4'></div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <div class='label background-red' data-ng-repeat='message in errors.company'>
-              {{message}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class='col'>
-        <div class='col width-1of4'></div>
-        <div class='col width-fill'>
-          <div class='cell'>
-            <input class='btn btn-primary' data-ng-click='create()' type='submit' value='Submit' />
-          </div>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
 </div>

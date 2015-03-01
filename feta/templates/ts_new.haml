@@ -8,68 +8,69 @@
         {{message}}}
 .cell.panel
   .body
-    .cell
-      .col
-        .col.width-1of4
-          .cell
-            %label Month
-        .col.width-fill
-          .cell
-            %select{'data-ng-class': '{"invalid": errors.month}', 'data-ng-model': 'timesheet.month'}
-              %option{'data-ng-repeat': '(i, m) in month', 'value': '{{i}}'}
-                {{m}}
-            %select{'data-ng-class': '{"invalid": errors.year}', 'data-ng-model': 'timesheet.year'}
-              %option{'data-ng-repeat': 'y in years', 'value': '{{y}}'}
-                {{y}}
-      .col{'data-ng-if': 'errors.month||errors.year'}
-        .col.width-1of4
-        .col.width-fill
-          .cell
-            .label.background-red{'data-ng-repeat': 'message in errors.month'}
-              Month: {{message}}
-            .label.background-red{'data-ng-repeat': 'message in errors.year'}
-              Year: {{message}}
-      .col
-        .col.width-1of4
-          .cell
-            %label Customer
-        .col.width-fill
-          .cell
-            %select{'data-ng-model':'selectedcustomer'}
-              %option{'data-ng-repeat':'c in customers|orderBy:["name","id"]', 'value': '{{c.id}}'}
-                {{c.name}}
-      .col
-        .col.width-1of4
-          .cell
-            %label Project
-        .col.width-fill
-          .cell
-            %select{'data-ng-class': '{"invalid": errors.project}', 'data-ng-model': 'timesheet.project'}
-              %option{'data-ng-repeat': 'p in projects|filter:{"customer": selectedcustomer}|orderBy:["name","id"]', 'value': '{{p.id}}'}
-                {{p.name}}
-      .col{'data-ng-if': 'errors.project'}
-        .col.width-1of4
-        .col.width-fill
-          .cell
-            .label.background-red{'data-ng-repeat': 'message in errors.project'}
-              {{message}}
-      .col
-        .col.width-1of4
-          .cell
-            %label Company
-        .col.width-fill
-          .cell
-            %select{'data-ng-class': '{"invalid": errors.company}', 'data-ng-model': 'timesheet.company'}
-              %option{'data-ng-repeat': 'c in companies|orderBy:["name","id"]', 'value': '{{c.id}}'}
-                {{c.name}}
-      .col{'data-ng-if': 'errors.company'}
-        .col.width-1of4
-        .col.width-fill
-          .cell
-            .label.background-red{'data-ng-repeat': 'message in errors.company'}
-              {{message}}
-      .col
-        .col.width-1of4
-        .col.width-fill
-          .cell
-            %input{'type': 'submit', 'class': 'btn btn-primary', 'data-ng-click': 'create()', 'value': 'Submit'}
+    %form
+      .cell
+        .col
+          .col.width-1of4
+            .cell
+              %label Month
+          .col.width-fill
+            .cell
+              %select{'data-ng-class': '{"invalid": errors.month}', 'data-ng-model': 'timesheet.month'}
+                %option{'data-ng-repeat': '(i, m) in month', 'value': '{{i}}'}
+                  {{m}}
+              %select{'data-ng-class': '{"invalid": errors.year}', 'data-ng-model': 'timesheet.year'}
+                %option{'data-ng-repeat': 'y in years', 'value': '{{y}}'}
+                  {{y}}
+        .col{'data-ng-if': 'errors.month||errors.year'}
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              .label.background-red{'data-ng-repeat': 'message in errors.month'}
+                Month: {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.year'}
+                Year: {{message}}
+        .col
+          .col.width-1of4
+            .cell
+              %label Customer
+          .col.width-fill
+            .cell
+              %select{'data-ng-model':'selectedcustomer'}
+                %option{'data-ng-repeat':'c in customers|orderBy:["name","id"]', 'value': '{{c.id}}'}
+                  {{c.name}}
+        .col
+          .col.width-1of4
+            .cell
+              %label Project
+          .col.width-fill
+            .cell
+              %select{'data-ng-class': '{"invalid": errors.project}', 'data-ng-model': 'timesheet.project'}
+                %option{'data-ng-repeat': 'p in projects|filter:{"customer": selectedcustomer}|orderBy:["name","id"]', 'value': '{{p.id}}'}
+                  {{p.name}}
+        .col{'data-ng-if': 'errors.project'}
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              .label.background-red{'data-ng-repeat': 'message in errors.project'}
+                {{message}}
+        .col
+          .col.width-1of4
+            .cell
+              %label Company
+          .col.width-fill
+            .cell
+              %select{'data-ng-class': '{"invalid": errors.company}', 'data-ng-model': 'timesheet.company'}
+                %option{'data-ng-repeat': 'c in companies|orderBy:["name","id"]', 'value': '{{c.id}}'}
+                  {{c.name}}
+        .col{'data-ng-if': 'errors.company'}
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              .label.background-red{'data-ng-repeat': 'message in errors.company'}
+                {{message}}
+        .col
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              %input{'type': 'submit', 'class': 'btn btn-primary', 'data-ng-click': 'create()', 'value': 'Submit'}
