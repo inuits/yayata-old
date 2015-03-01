@@ -1,37 +1,26 @@
-<div class='cell'>
-  <h1>Timesheet</h1>
-</div>
-<div class='cell'>
-  <table class='border'>
-    <tr>
-      <td>Customer:</td>
-      <td>
+.cell
+  %h1 Timesheet
+.cell
+  %table.border
+    %tr
+      %td Customer:
+      %td
         {{timesheet.customer_name}}
-      </td>
-      <td>Project:</td>
-      <td>
+      %td Project:
+      %td
         {{timesheet.project_name}}
-      </td>
-    </tr>
-    <tr>
-      <td>Month:</td>
-      <td>
+    %tr
+      %td Month:
+      %td
         {{timesheet.month}}/{{timesheet.year}}
-      </td>
-      <td>User:</td>
-      <td>
+      %td User:
+      %td
         {{timesheet.user_name}}
-      </td>
-    </tr>
-  </table>
-</div>
-<div class='cell panel' data-ng-if='timesheet.locked'>
-  <div class='header background-orange'>
+.cell.panel{'data-ng-if': 'timesheet.locked'}
+  .header.background-orange
     This timesheet is locked.
-  </div>
-</div>
-<div class='cell'>
-  <div class='body'>
+.cell
+  .body
     <table class="datasheet">
       <thead>
         <tr>
@@ -94,7 +83,9 @@
             <td class="text-center "></td>
             <td class="text-center "></td>
             <td class="text-center ">
-              <a data-ng-click="lock(timesheet)" data-ng-class="{                'background-orange': timesheet.locked,                  'disabled': timesheet.locked && !$root.user.is_staff}">
+              <a data-ng-click="lock(timesheet)" data-ng-class="{
+                'background-orange': timesheet.locked,
+                  'disabled': timesheet.locked && !$root.user.is_staff}">
                     <span data-ng-class="{'icon':true, 'icon-lock':timesheet.locked, 'icon-unlock': !timesheet.locked}"></span
                       </a>
             </td>
@@ -102,7 +93,5 @@
         </tbody>
     </table>
 
-  </div>
-</div>
 </div>
 
