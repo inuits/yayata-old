@@ -1,0 +1,54 @@
+.cell
+  %h1 Login
+.cell.panel{'data-ng-repeat': 'message in errors.non_field_errors'}
+  .body
+    .col
+      .cell.color-red
+        %span.icon.icon-16.icon-warning-sign.color-red.float-left
+        {{message}}}
+.cell.panel
+  .body
+    %form
+      .cell
+        .col
+          .col.width-1of4
+            .cell
+              %label Username
+          .col.width-fill
+            .cell
+              %input{'data-ng-class': '{"text":true, "invalid": errors.username}', 'type': 'text', 'data-ng-model': 'username'}
+          .col{'data-ng-if': 'errors.username'}
+            .col.width-1of4
+            .col.width-fill
+              .cell
+                .label.background-red{'data-ng-repeat': 'message in errors.username'}
+                  {{message}}
+        .col
+          .col.width-1of4
+            .cell
+              %label Password
+          .col.width-fill
+            .cell
+              %input{'data-ng-class':'{"text": true, "invalid": errors.password}', 'type':'password', 'data-ng-model': 'password'}
+        .col{'data-ng-if': 'errors.password'}
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              .label.background-red{'data-ng-repeat': 'message in errors.password'}
+                {{message}}
+        .col
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              %input.checkbox{'type': 'checkbox', 'data-ng-model': 'use_cookies'}
+              %label Remember me
+        .col
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              %a.button.icon-button{'data-ng-click': 'login()'}
+                %span{'data-ng-class': '{"icon":true, "icon-user": !submitted, "spin icon-spinner": submitted}'}
+                Login
+  .footer.background-blue{'data-ng-if': 'use_cookies'}
+    %strong Cookies:
+    The remember me option is enabled, so your api key will be stored in a cookie.

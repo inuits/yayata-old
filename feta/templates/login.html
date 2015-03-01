@@ -1,82 +1,89 @@
-<div class="cell">    
-    <h1>Login</h1>
+<div class='cell'>
+  <h1>Login</h1>
 </div>
-<div class="cell panel" data-ng-repeat="message in errors.non_field_errors">
-    <div class="body">
-        <div class="col">
-            <div class="cell color-red">
-                <span class="icon icon-16 icon-warning-sign color-red float-left"></span>
-                {{message}}
+<div class='cell panel' data-ng-repeat='message in errors.non_field_errors'>
+  <div class='body'>
+    <div class='col'>
+      <div class='cell color-red'>
+        <span class='icon icon-16 icon-warning-sign color-red float-left'></span>
+        {{message}}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class='cell panel'>
+  <div class='body'>
+    <form>
+      <div class='cell'>
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Username</label>
             </div>
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <input data-ng-class='{"text":true, "invalid": errors.username}' type='text' data-ng-model='username' />
+            </div>
+          </div>
+          <div class='col' data-ng-if='errors.username'>
+            <div class='col width-1of4'></div>
+            <div class='col width-fill'>
+              <div class='cell'>
+                <div class='label background-red' data-ng-repeat='message in errors.username'>
+                  {{message}}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-<div class="cell panel">
-    <div class="body">
-        <div class="cell">
-            <form>
-                <div class="col">
-                    <div class="col width-1of4">
-                        <div class="cell">
-                            <label for="login">Login</label>
-                        </div>
-                    </div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <input data-ng-class="{'text':true, 'invalid': errors.username}" type="text" data-ng-model="username"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" ng-if="errors.username">
-                    <div class="col width-1of4"></div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <div class="label background-red" data-ng-repeat="message in errors.username">{{message}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col width-1of4">
-                        <div class="cell">
-                            <label for="password">Password</label>
-                        </div>
-                    </div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <input data-ng-class="{'text':true, 'invalid': errors.password}" type="password" data-ng-model="password"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" ng-if="errors.password">
-                    <div class="col width-1of4"></div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <div class="label background-red" data-ng-repeat="message in errors.password">{{message}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col width-1of4"></div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <input type="checkbox" class="checkbox" data-ng-model="use_cookies"/> <label>Remember me</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="col width-1of4"></div>
-                    <div class="col width-fill">
-                        <div class="cell">
-                            <a class="button icon-button" data-ng-click="login()"><span data-ng-class="{'icon':true, 'icon-user': !submitted, 'spin icon-spinner': submitted}"></span> Login</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Password</label>
+            </div>
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <input data-ng-class='{"text": true, "invalid": errors.password}' type='password' data-ng-model='password' />
+            </div>
+          </div>
         </div>
-    </div>
-    <div class="footer background-blue" data-ng-if="use_cookies">
-        <strong>Cookies:</strong> The remember me option is enabled, so your api key will be stored in a cookie.
-    </div>
-</div>
-</div>
+        <div class='col' data-ng-if='errors.password'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <div class='label background-red' data-ng-repeat='message in errors.password'>
+                {{message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <input class='checkbox' type='checkbox' data-ng-model='use_cookies' />
+              <label>Remember me</label>
+            </div>
+          </div>
+        </div>
+        <div class='col'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <a class='button icon-button' data-ng-click='login()'>
+                <span data-ng-class='{"icon":true, "icon-user": !submitted, "spin icon-spinner": submitted}'></span>
+                Login
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class='footer background-blue' data-ng-if='use_cookies'>
+    <strong>Cookies:</strong>
+    The remember me option is enabled, so your api key will be stored in a cookie.
+  </div>
 </div>
