@@ -86,6 +86,7 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
 }
 
 function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
+    $scope.newhour = {};
     Timesheet.get({'timesheetId': $routeParams.timesheetId},
             function(data){ $scope.timesheet = data; });
     Hour.get({'tid': $routeParams.timesheetId},
