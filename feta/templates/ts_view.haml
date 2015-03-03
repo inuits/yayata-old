@@ -23,9 +23,9 @@
   .header
     Add a task
   .body
-    %form
-      .cell
-        .col
+    .col
+     .cell
+       %form
           .col.width-1of12
             .cell
               %input.text.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: 'Day', 'data-ng-model': 'newhour.day'}
@@ -65,53 +65,42 @@
                 200%: {{message}}
               .label.background-red{'data-ng-repeat': 'message in errors.hourstravel'}
                 Travel: {{message}}
-.cell
+.cell.panel
+  .header
+    Monthly Time Report
   .body
-    <table class="datasheet">
-      <thead>
-        <tr>
-          <th>Day</th>
-            <th>Message</th>
-            <th>100%</th>
-            <th>150%</th>
-            <th>200%</th>
-            <th>Travel</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="hour in hours|orderBy:['day','id']">
-          <td class="text-center ">{{hour.day}}</td>
-            <td class="text-center width-fill">{{hour.task}}</td>
-            <td class="text-center ">{{hour.hours}}</td>
-            <td class="text-center ">{{hour.hours150}}</td>
-            <td class="text-center ">{{hour.hours200}}</td>
-            <td class="text-center ">{{hour.hourstravel}}</td>
-            <td class="text-center ">
-              <div class="btn-group">
-                <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-edit"></i></a>
-                  <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete()"><i class="glyphicon glyphicon-retweet"></i></a>
-                    <a data-ng-class="{'btn': true, 'btn-default': true, 'disabled': timesheet.locked}" data-ng-click="delete(hour)"><i class="glyphicon glyphicon-trash"></i></a>
-                </div>
-            </td>
-        </tr>
-        <tr>
-          <td class="text-center " data-ng-bind="hours.length + ' entries'"></td>
-            <td class="text-center "></td>
-            <td class="text-center "></td>
-            <td class="text-center "></td>
-            <td class="text-center "></td>
-            <td class="text-center "></td>
-            <td class="text-center ">
-              <a data-ng-click="lock(timesheet)" data-ng-class="{
-                'background-orange': timesheet.locked,
-                  'disabled': timesheet.locked && !$root.user.is_staff}">
-                    <span data-ng-class="{'icon':true, 'icon-lock':timesheet.locked, 'icon-unlock': !timesheet.locked}"></span>
-                      </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-</div>
+      %table.datasheet
+        %tr
+          %td
+            .label.float-right.background-blue
+              100%
+            .label.float-right.background-orange
+              150%
+            .label.float-right.background-red
+              200%
+            .label.float-right.background-green
+              Travel
+            .label.float-left.background-blue
+              Day
+        %tr{'data-ng-repeat': 'hour in hours|orderBy:["day","id"]'}
+          %td
+           .label.float-right.background-blue{'data-ng-if': 'hour.hours'}
+             {{hour.hours}}
+           .label.float-right.background-orange{'data-ng-if': 'hour.hours150'}
+             {{hour.hours150}}
+           .label.float-right.background-red{'data-ng-if': 'hour.hours200'}
+             {{hour.hours200}}
+           .label.float-right.background-green{'data-ng-if': 'hour.hourstravel'}
+             {{hour.hourstravel}}
+           .label.float-left.background-blue
+             {{hour.day}}
+           {{hour.task}}
+        %tr
+          %td
+            .label.float-right.background-blue{'data-ng-bind': 'hours.sum("hours") + "h (" + hours.sum("hours")/8 +" d)"', 'data-ng-if': 'hours.sum("hours") > 0'}
+            .label.float-right.background-orange{'data-ng-bind': 'hours.sum("hours150") + "h (" + hours.sum("hours150")/8 +" d)"', 'data-ng-if': 'hours.sum("hours150") > 0'}
+            .label.float-right.background-red{'data-ng-bind': 'hours.sum("hours200") + "h (" + hours.sum("hours200")/8 +" d)"', 'data-ng-if': 'hours.sum("hourstravel") > 0'}
+            .label.float-right.background-green{'data-ng-bind': 'hours.sum("travel") + "h (" + hours.sum("hourstravel")/8 +" d)"', 'data-ng-if': 'hours.sum("hourstravel") > 0'}
+            .label.float-right.background-black
+              Total
 
