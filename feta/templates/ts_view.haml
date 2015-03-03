@@ -31,23 +31,40 @@
               %input.text.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: 'Day', 'data-ng-model': 'newhour.day'}
           .col.width-6of12
             .cell
-              %input.text.width-11of12{'data-ng-class': '{"invalid":errors.day}', placeholder: 'Task', 'data-ng-model': 'newhour.task'}
+              %input.text.width-11of12{'data-ng-class': '{"invalid":errors.task}', placeholder: 'Task', 'data-ng-model': 'newhour.task'}
           .col.width-1of12
             .cell
-              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: '100%', 'data-ng-model': 'newhour.hours'}
+              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.hours}', placeholder: '100%', 'data-ng-model': 'newhour.hours'}
           .col.width-1of12
             .cell
-              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: '150%', 'data-ng-model': 'newhour.hours150'}
+              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.hours150}', placeholder: '150%', 'data-ng-model': 'newhour.hours150'}
           .col.width-1of12
             .cell
-              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: '200%', 'data-ng-model': 'newhour.hours200'}
+              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.hours200}', placeholder: '200%', 'data-ng-model': 'newhour.hours200'}
           .col.width-1of12
             .cell
-              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: 'Travel', 'data-ng-model': 'newhour.hourstravel'}
+              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.hourstravel}', placeholder: 'Travel', 'data-ng-model': 'newhour.hourstravel'}
           .col.width-1of12
             .cell
               %a.button.width-8of12{'data-ng-click': 'add()'}
                 Add
+        .col
+          .col.width-11of12
+            .cell
+              .label.background-red{'data-ng-repeat': 'message in errors.non_field_errors'}
+                {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.day'}
+                Day: {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.task'}
+                Task: {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.hours'}
+                100%: {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.hours150'}
+                150%: {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.hours200'}
+                200%: {{message}}
+              .label.background-red{'data-ng-repeat': 'message in errors.hourstravel'}
+                Travel: {{message}}
 .cell
   .body
     <table class="datasheet">

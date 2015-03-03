@@ -45,27 +45,27 @@
           </div>
           <div class='col width-6of12'>
             <div class='cell'>
-              <input class='text width-11of12' data-ng-class='{"invalid":errors.day}' placeholder='Task' data-ng-model='newhour.task' />
+              <input class='text width-11of12' data-ng-class='{"invalid":errors.task}' placeholder='Task' data-ng-model='newhour.task' />
             </div>
           </div>
           <div class='col width-1of12'>
             <div class='cell'>
-              <input class='text width-10of12' data-ng-class='{"invalid":errors.day}' placeholder='100%' data-ng-model='newhour.hours' />
+              <input class='text width-10of12' data-ng-class='{"invalid":errors.hours}' placeholder='100%' data-ng-model='newhour.hours' />
             </div>
           </div>
           <div class='col width-1of12'>
             <div class='cell'>
-              <input class='text width-10of12' data-ng-class='{"invalid":errors.day}' placeholder='150%' data-ng-model='newhour.hours150' />
+              <input class='text width-10of12' data-ng-class='{"invalid":errors.hours150}' placeholder='150%' data-ng-model='newhour.hours150' />
             </div>
           </div>
           <div class='col width-1of12'>
             <div class='cell'>
-              <input class='text width-10of12' data-ng-class='{"invalid":errors.day}' placeholder='200%' data-ng-model='newhour.hours200' />
+              <input class='text width-10of12' data-ng-class='{"invalid":errors.hours200}' placeholder='200%' data-ng-model='newhour.hours200' />
             </div>
           </div>
           <div class='col width-1of12'>
             <div class='cell'>
-              <input class='text width-10of12' data-ng-class='{"invalid":errors.day}' placeholder='Travel' data-ng-model='newhour.hourstravel' />
+              <input class='text width-10of12' data-ng-class='{"invalid":errors.hourstravel}' placeholder='Travel' data-ng-model='newhour.hourstravel' />
             </div>
           </div>
           <div class='col width-1of12'>
@@ -73,6 +73,33 @@
               <a class='button width-8of12' data-ng-click='add()'>
                 Add
               </a>
+            </div>
+          </div>
+        </div>
+        <div class='col'>
+          <div class='col width-11of12'>
+            <div class='cell'>
+              <div class='label background-red' data-ng-repeat='message in errors.non_field_errors'>
+                {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.day'>
+                Day: {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.task'>
+                Task: {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.hours'>
+                100%: {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.hours150'>
+                150%: {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.hours200'>
+                200%: {{message}}
+              </div>
+              <div class='label background-red' data-ng-repeat='message in errors.hourstravel'>
+                Travel: {{message}}
+              </div>
             </div>
           </div>
         </div>
