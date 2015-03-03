@@ -1,3 +1,13 @@
+Array.prototype.sum = function (prop) {
+        var total = 0
+            for ( var i = 0, _len = this.length; i < _len; i++ ) {
+                if (this[i][prop] != null) {
+                total += parseFloat(this[i][prop])
+                }
+            }
+        return total
+}
+
 function TimesheetListCtrl($scope, Timesheet, $location){
     var timesheet = Timesheet.query({},
         function(){
@@ -94,8 +104,12 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
     $scope.add = function(){
         Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.newhour),
             function(data){
+            $scope.errors={};
                 $scope.hours.push(data);
                 $scope.newhour.day = parseInt($scope.newhour.day)+1;
+            },
+            function(data){
+                $scope.errors=data.data;
             }
         );
     }
