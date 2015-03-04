@@ -99,8 +99,11 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
     $scope.newhour = {};
     Timesheet.get({'timesheetId': $routeParams.timesheetId},
             function(data){ $scope.timesheet = data; });
+    $scope.get_hours = function() {
     Hour.get({'tid': $routeParams.timesheetId},
             function(data){ $scope.hours = data; });
+    }
+    $scope.get_hours()
     $scope.add = function(){
         Hour.create(angular.extend({'tid': $scope.timesheet.id},$scope.newhour),
             function(data){
@@ -113,7 +116,14 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
             }
         );
     }
-    $scope.delete = function(hour){
+    $scope.updatehour = function(hour){
+        Hour.update({timesheet: $scope.timesheet.id, hour: hour.id, data: hour},
+            function(data){
+              $scope.get_hours()
+            }
+        );
+    }
+    $scope.deletehour = function(hour){
         Hour.delete({timesheet: $scope.timesheet.id, hour: hour.id},
             function(data){
                 var idx = $scope.hours.indexOf(hour);

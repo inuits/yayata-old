@@ -83,7 +83,7 @@
             .label.float-left.background-blue
               Day
         %tr{'data-ng-repeat': 'hour in hours|orderBy:["day","id"]'}
-          %td
+          %td{'data-ng-if': '!hour.edit', 'data-ng-click': 'hour.edit=!hour.edit'}
            .label.float-right.background-blue{'data-ng-if': 'hour.hours'}
              {{hour.hours}}
            .label.float-right.background-orange{'data-ng-if': 'hour.hours150'}
@@ -95,6 +95,33 @@
            .label.float-left.background-blue
              {{hour.day}}
            {{hour.task}}
+          %td{'data-ng-if': 'hour.edit'}
+           %form
+             .cell
+              .col.width-1of12
+                .cell
+                  %input.text.background-blue.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: 'Day', 'data-ng-model': 'hour.day'}
+              .col.width-6of12
+                .cell
+                  %input.text.width-11of12{'data-ng-class': '{"invalid":errors.task}', placeholder: 'Task', 'data-ng-model': 'hour.task'}
+              .col.width-1of12
+                .cell
+                  %input.text.background-blue.width-10of12{'data-ng-class': '{"invalid":errors.hours}', placeholder: '100%', 'data-ng-model': 'hour.hours'}
+              .col.width-1of12
+                .cell
+                  %input.text.background-orange.width-10of12{'data-ng-class': '{"invalid":errors.hours150}', placeholder: '150%', 'data-ng-model': 'hour.hours150'}
+              .col.width-1of12
+                .cell
+                  %input.text.background-red.width-10of12{'data-ng-class': '{"invalid":errors.hours200}', placeholder: '200%', 'data-ng-model': 'hour.hours200'}
+              .col.width-1of12
+                .cell
+                  %input.text.background-green.width-10of12{'data-ng-class': '{"invalid":errors.hourstravel}', placeholder: 'Travel', 'data-ng-model': 'hour.hourstravel'}
+              .col.width-1of12
+                .cell
+                 %a.button.width-6of12{'data-ng-click': 'edit(hour)'}
+                   Edit
+                 %a.button.width-6of12{'data-ng-click': 'deletehour(hour)'}
+                   Delete
         %tr
           %td
             .label.float-right.background-blue{'data-ng-bind': 'hours.sum("hours") + "h (" + hours.sum("hours")/8 +" d)"', 'data-ng-if': 'hours.sum("hours") > 0'}
