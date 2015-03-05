@@ -117,7 +117,7 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
         );
     }
     $scope.updatehour = function(hour){
-        Hour.update({timesheet: $scope.timesheet.id, hour: hour.id, data: hour},
+        Hour.update(angular.extend({'tid': $scope.timesheet.id, 'hid': hour.id}, hour),
             function(data){
               $scope.get_hours()
             }

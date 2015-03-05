@@ -186,7 +186,7 @@
               </div>
               <div class='col width-1of12'>
                 <div class='cell'>
-                 <a class='button width-6of12' data-ng-click='edit(hour)'>
+                 <a class='button width-6of12' data-ng-click='updatehour(hour)'>
                    Edit
                  </a>
                  <a class='button width-6of12' data-ng-click='deletehour(hour)'>
@@ -201,9 +201,9 @@
         <tr>
           <td>
             <div class='label float-right background-blue' data-ng-bind='hours.sum("hours") + "h (" + hours.sum("hours")/8 +" d)"' data-ng-if='hours.sum("hours") > 0'></div>
-            <div class='label float-right background-orange' data-ng-bind='hours.sum("hours150") + "h (" + hours.sum("hours150")/8 +" d)"' data-ng-if='hours.sum("hours150") > 0'></div>
-            <div class='label float-right background-red' data-ng-bind='hours.sum("hours200") + "h (" + hours.sum("hours200")/8 +" d)"' data-ng-if='hours.sum("hourstravel") > 0'></div>
-            <div class='label float-right background-green' data-ng-bind='hours.sum("travel") + "h (" + hours.sum("hourstravel")/8 +" d)"' data-ng-if='hours.sum("hourstravel") > 0'></div>
+            <div class='label float-right background-orange' data-ng-bind='hours.sum("hours150") + "h (" + hours.sum("hours150")/8 +" d)"' data-ng-if='parseFloat(hours.sum("hours150")) > 0'></div>
+            <div class='label float-right background-red' data-ng-bind='hours.sum("hours200") + "h (" + hours.sum("hours200")/8 +" d)"' data-ng-show='hours.sum("hourstravel") > 0'></div>
+            <div class='label float-right background-green' data-ng-bind='hours.sum("hourstravel") + "h (" + hours.sum("hourstravel")/8 +" d)"' data-ng-show='hours.sum("hourstravel") > 0'></div>
             <div class='label float-right background-black'>
               Total
 

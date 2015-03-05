@@ -118,16 +118,16 @@
                   %input.text.background-green.width-10of12{'data-ng-class': '{"invalid":errors.hourstravel}', placeholder: 'Travel', 'data-ng-model': 'hour.hourstravel'}
               .col.width-1of12
                 .cell
-                 %a.button.width-6of12{'data-ng-click': 'edit(hour)'}
+                 %a.button.width-6of12{'data-ng-click': 'updatehour(hour)'}
                    Edit
                  %a.button.width-6of12{'data-ng-click': 'deletehour(hour)'}
                    Delete
         %tr
           %td
             .label.float-right.background-blue{'data-ng-bind': 'hours.sum("hours") + "h (" + hours.sum("hours")/8 +" d)"', 'data-ng-if': 'hours.sum("hours") > 0'}
-            .label.float-right.background-orange{'data-ng-bind': 'hours.sum("hours150") + "h (" + hours.sum("hours150")/8 +" d)"', 'data-ng-if': 'hours.sum("hours150") > 0'}
-            .label.float-right.background-red{'data-ng-bind': 'hours.sum("hours200") + "h (" + hours.sum("hours200")/8 +" d)"', 'data-ng-if': 'hours.sum("hourstravel") > 0'}
-            .label.float-right.background-green{'data-ng-bind': 'hours.sum("travel") + "h (" + hours.sum("hourstravel")/8 +" d)"', 'data-ng-if': 'hours.sum("hourstravel") > 0'}
+            .label.float-right.background-orange{'data-ng-bind': 'hours.sum("hours150") + "h (" + hours.sum("hours150")/8 +" d)"', 'data-ng-if': 'parseFloat(hours.sum("hours150")) > 0'}
+            .label.float-right.background-red{'data-ng-bind': 'hours.sum("hours200") + "h (" + hours.sum("hours200")/8 +" d)"', 'data-ng-show': 'hours.sum("hourstravel") > 0'}
+            .label.float-right.background-green{'data-ng-bind': 'hours.sum("hourstravel") + "h (" + hours.sum("hourstravel")/8 +" d)"', 'data-ng-show': 'hours.sum("hourstravel") > 0'}
             .label.float-right.background-black
               Total
 

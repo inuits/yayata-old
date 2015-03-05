@@ -65,6 +65,7 @@ factory('Hour', function($resource){
     return $resource(BetaApiUrl + 'timesheets/:timesheet/hours/:hour/', {}, {
         create: {method:'POST', params:{timesheetId:'@tid'}, url: BetaApiUrl + 'timesheets/:timesheetId/hours/', isArray:false},
         get: {method:'GET', url: BetaApiUrl + 'timesheets/:tid/hours/', isArray:true},
+        update: {method:'PUT', params:{timesheet:'@tid', hour:'@hid'}},
         delete: {
             method:'DELETE',
             params:{
