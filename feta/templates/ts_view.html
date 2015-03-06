@@ -31,8 +31,16 @@
   </div>
 </div>
 <div class='cell panel' data-ng-if='!timesheet.locked'>
-  <div class='header'>
+  <div class='header' data-ng-if='!editHour || editHour == -1'>
     Add a task
+  </div>
+  <div class='header' data-ng-if='editHour && editHour >= 0'>
+    <span class='float-right'>
+      <a data-ng-click='$parent.newhour.id=-1; $parent.editHour=-1;'>
+        Cancel
+      </a>
+    </span>
+    Edit a task
   </div>
   <div class='body'>
     <div class='col'>
@@ -68,11 +76,25 @@
               <input class='text width-10of12' data-ng-class='{"invalid":errors.hourstravel}' placeholder='Travel' data-ng-model='newhour.hourstravel' />
             </div>
           </div>
-          <div class='col width-1of12'>
+          <div class='col width-1of12' data-ng-if='!editHour'>
             <div class='cell'>
               <a class='button width-8of12' data-ng-click='add()'>
                 Add
               </a>
+            </div>
+          </div>
+          <div class='col width-1of24' data-ng-if='editHour'>
+            <div class='cell'>
+             <a class='button width-6of12' data-ng-click='updatehour(hour)'>
+               <span class='icon icon-save'></span>
+             </a>
+            </div>
+          </div>
+          <div class='col width-1of24' data-ng-if='editHour'>
+            <div class='cell'>
+             <a class='button width-6of12' data-ng-click='deletehour(hour)'>
+               <span class='icon icon-trash'></span>
+             </a>
             </div>
           </div>
         <div class='col'>
@@ -133,7 +155,7 @@
           </td>
         </tr>
         <tr data-ng-repeat='hour in hours|orderBy:["day","id"]'>
-          <td data-ng-if='!hour.edit' data-ng-click='hour.edit=!hour.edit'>
+          <td data-ng-class='{"background-red": $parent.editHour==hour.id}' data-ng-click='$parent.editHour=hour.id;$parent.newhour=hour'>
            <div class='label float-right background-blue' data-ng-if='hour.hours'>
              {{hour.hours}}
            </div>
@@ -150,52 +172,6 @@
              {{hour.day}}
            </div>
            {{hour.task}}
-          </td>
-          <td data-ng-if='hour.edit'>
-           <form>
-             <div class='cell'>
-              <div class='col width-1of12'>
-                <div class='cell'>
-                  <input class='text background-blue width-10of12' data-ng-class='{"invalid":errors.day}' placeholder='Day' data-ng-model='hour.day' />
-                </div>
-              </div>
-              <div class='col width-6of12'>
-                <div class='cell'>
-                  <input class='text width-11of12' data-ng-class='{"invalid":errors.task}' placeholder='Task' data-ng-model='hour.task' />
-                </div>
-              </div>
-              <div class='col width-1of12'>
-                <div class='cell'>
-                  <input class='text background-blue width-10of12' data-ng-class='{"invalid":errors.hours}' placeholder='100%' data-ng-model='hour.hours' />
-                </div>
-              </div>
-              <div class='col width-1of12'>
-                <div class='cell'>
-                  <input class='text background-orange width-10of12' data-ng-class='{"invalid":errors.hours150}' placeholder='150%' data-ng-model='hour.hours150' />
-                </div>
-              </div>
-              <div class='col width-1of12'>
-                <div class='cell'>
-                  <input class='text background-red width-10of12' data-ng-class='{"invalid":errors.hours200}' placeholder='200%' data-ng-model='hour.hours200' />
-                </div>
-              </div>
-              <div class='col width-1of12'>
-                <div class='cell'>
-                  <input class='text background-green width-10of12' data-ng-class='{"invalid":errors.hourstravel}' placeholder='Travel' data-ng-model='hour.hourstravel' />
-                </div>
-              </div>
-              <div class='col width-1of12'>
-                <div class='cell'>
-                 <a class='button width-6of12' data-ng-click='updatehour(hour)'>
-                   Edit
-                 </a>
-                 <a class='button width-6of12' data-ng-click='deletehour(hour)'>
-                   Delete
-                 </a>
-                </div>
-              </div>
-             </div>
-           </form>
           </td>
         </tr>
         <tr>

@@ -259,3 +259,7 @@
 input.invalid{
     border-color: #9d261d;
 }
+
+input.border{
+    border-width:1px;
+}

@@ -20,8 +20,13 @@
   .header.background-orange
     This timesheet is locked.
 .cell.panel{'data-ng-if': '!timesheet.locked'}
-  .header
+  .header{'data-ng-if': '!editHour || editHour == -1'}
     Add a task
+  .header{'data-ng-if': 'editHour && editHour >= 0'}
+    %span.float-right
+      %a{'data-ng-click': '$parent.newhour.id=-1; $parent.editHour=-1;'}
+        Cancel
+    Edit a task
   .body
     .col
      .cell
@@ -44,10 +49,18 @@
           .col.width-1of12
             .cell
               %input.text.width-10of12{'data-ng-class': '{"invalid":errors.hourstravel}', placeholder: 'Travel', 'data-ng-model': 'newhour.hourstravel'}
-          .col.width-1of12
+          .col.width-1of12{'data-ng-if':'!editHour'}
             .cell
               %a.button.width-8of12{'data-ng-click': 'add()'}
                 Add
+          .col.width-1of24{'data-ng-if':'editHour'}
+            .cell
+             %a.button.width-6of12{'data-ng-click': 'updatehour(hour)'}
+               %span.icon.icon-save
+          .col.width-1of24{'data-ng-if':'editHour'}
+            .cell
+             %a.button.width-6of12{'data-ng-click': 'deletehour(hour)'}
+               %span.icon.icon-trash
         .col
           .col.width-11of12
             .cell
@@ -83,7 +96,7 @@
             .label.float-left.background-blue
               Day
         %tr{'data-ng-repeat': 'hour in hours|orderBy:["day","id"]'}
-          %td{'data-ng-if': '!hour.edit', 'data-ng-click': 'hour.edit=!hour.edit'}
+          %td{'data-ng-class': '{"background-red": $parent.editHour==hour.id}', 'data-ng-click': '$parent.editHour=hour.id;$parent.newhour=hour'}
            .label.float-right.background-blue{'data-ng-if': 'hour.hours'}
              {{hour.hours}}
            .label.float-right.background-orange{'data-ng-if': 'hour.hours150'}
@@ -95,33 +108,6 @@
            .label.float-left.background-blue
              {{hour.day}}
            {{hour.task}}
-          %td{'data-ng-if': 'hour.edit'}
-           %form
-             .cell
-              .col.width-1of12
-                .cell
-                  %input.text.background-blue.width-10of12{'data-ng-class': '{"invalid":errors.day}', placeholder: 'Day', 'data-ng-model': 'hour.day'}
-              .col.width-6of12
-                .cell
-                  %input.text.width-11of12{'data-ng-class': '{"invalid":errors.task}', placeholder: 'Task', 'data-ng-model': 'hour.task'}
-              .col.width-1of12
-                .cell
-                  %input.text.background-blue.width-10of12{'data-ng-class': '{"invalid":errors.hours}', placeholder: '100%', 'data-ng-model': 'hour.hours'}
-              .col.width-1of12
-                .cell
-                  %input.text.background-orange.width-10of12{'data-ng-class': '{"invalid":errors.hours150}', placeholder: '150%', 'data-ng-model': 'hour.hours150'}
-              .col.width-1of12
-                .cell
-                  %input.text.background-red.width-10of12{'data-ng-class': '{"invalid":errors.hours200}', placeholder: '200%', 'data-ng-model': 'hour.hours200'}
-              .col.width-1of12
-                .cell
-                  %input.text.background-green.width-10of12{'data-ng-class': '{"invalid":errors.hourstravel}', placeholder: 'Travel', 'data-ng-model': 'hour.hourstravel'}
-              .col.width-1of12
-                .cell
-                 %a.button.width-6of12{'data-ng-click': 'updatehour(hour)'}
-                   Edit
-                 %a.button.width-6of12{'data-ng-click': 'deletehour(hour)'}
-                   Delete
         %tr
           %td
             .label.float-right.background-blue{'data-ng-bind': 'hours.sum("hours") + "h (" + hours.sum("hours")/8 +" d)"', 'data-ng-if': 'hours.sum("hours") > 0'}
