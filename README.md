@@ -11,7 +11,7 @@ used internally at Inuits by consultants to report their time.
 
 ## Current status
 
-Not working ; very early stage
+But we will make it work
 
 
 ## Screenshot
