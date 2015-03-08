@@ -40,6 +40,7 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     $scope.login = function(){
         $scope.submitted = true;
         login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
+            $rootScope.errors = [];
             $scope.submitted = false;
             api.init(data['token']);
             if ($scope.use_cookies){
