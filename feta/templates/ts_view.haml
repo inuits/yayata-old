@@ -20,11 +20,11 @@
   .header.background-orange
     This timesheet is locked.
 .cell.panel{'data-ng-if': '!timesheet.locked'}
-  .header{'data-ng-if': '!editHour || editHour == -1'}
+  .header{'data-ng-if': '!edithour'}
     Add a task
-  .header{'data-ng-if': 'editHour && editHour >= 0'}
+  .header{'data-ng-if': 'edithour'}
     %span.float-right
-      %a{'data-ng-click': '$parent.newhour.id=-1; $parent.editHour=-1;'}
+      %a{'data-ng-click': '$parent.stopEditing()'}
         Cancel
     Edit task {{newhour.id}}
   .body
@@ -49,17 +49,17 @@
           .col.width-1of12
             .cell
               %input.text.width-10of12{'data-ng-class': '{"invalid":errors.hourstravel}', placeholder: 'Travel', 'data-ng-model': 'newhour.hourstravel'}
-          .col.width-1of12{'data-ng-if':'!editHour'}
+          .col.width-1of12{'data-ng-if':'!edithour'}
             .cell
               %a.button.width-8of12{'data-ng-click': 'add()'}
                 Add
-          .col.width-1of24{'data-ng-if':'editHour'}
+          .col.width-1of24{'data-ng-if':'edithour'}
             .cell
-             %a.button.width-6of12{'data-ng-click': 'updatehour(hour)'}
+             %a.button.width-6of12{'data-ng-click': 'updatehour(newhour)'}
                %span.icon.icon-save
-          .col.width-1of24{'data-ng-if':'editHour'}
+          .col.width-1of24{'data-ng-if':'edithour'}
             .cell
-             %a.button.width-6of12{'data-ng-click': 'deletehour(hour)'}
+             %a.button.width-6of12{'data-ng-click': 'deletehour(newhour)'}
                %span.icon.icon-trash
         .col
           .col.width-11of12
@@ -96,7 +96,7 @@
             .label.float-left.background-blue
               Day
         %tr{'data-ng-repeat': 'hour in hours|orderBy:["day","id"]'}
-          %td{'data-ng-class': '{"background-red": $parent.editHour==hour.id}', 'data-ng-click': '$parent.editHour=hour.id;$parent.newhour=hour'}
+          %td{'data-ng-class': '{"background-red": $parent.newhour.id==hour.id && $parent.edithour}', 'data-ng-click': '$parent.edithour=true;$parent.newhour=hour'}
            .label.float-right.background-blue{'data-ng-if': 'hour.hours'}
              {{hour.hours}}
            .label.float-right.background-orange{'data-ng-if': 'hour.hours150'}

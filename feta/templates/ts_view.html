@@ -31,12 +31,12 @@
   </div>
 </div>
 <div class='cell panel' data-ng-if='!timesheet.locked'>
-  <div class='header' data-ng-if='!editHour || editHour == -1'>
+  <div class='header' data-ng-if='!edithour'>
     Add a task
   </div>
-  <div class='header' data-ng-if='editHour && editHour >= 0'>
+  <div class='header' data-ng-if='edithour'>
     <span class='float-right'>
-      <a data-ng-click='$parent.newhour.id=-1; $parent.editHour=-1;'>
+      <a data-ng-click='$parent.stopEditing()'>
         Cancel
       </a>
     </span>
@@ -76,23 +76,23 @@
               <input class='text width-10of12' data-ng-class='{"invalid":errors.hourstravel}' placeholder='Travel' data-ng-model='newhour.hourstravel' />
             </div>
           </div>
-          <div class='col width-1of12' data-ng-if='!editHour'>
+          <div class='col width-1of12' data-ng-if='!edithour'>
             <div class='cell'>
               <a class='button width-8of12' data-ng-click='add()'>
                 Add
               </a>
             </div>
           </div>
-          <div class='col width-1of24' data-ng-if='editHour'>
+          <div class='col width-1of24' data-ng-if='edithour'>
             <div class='cell'>
-             <a class='button width-6of12' data-ng-click='updatehour(hour)'>
+             <a class='button width-6of12' data-ng-click='updatehour(newhour)'>
                <span class='icon icon-save'></span>
              </a>
             </div>
           </div>
-          <div class='col width-1of24' data-ng-if='editHour'>
+          <div class='col width-1of24' data-ng-if='edithour'>
             <div class='cell'>
-             <a class='button width-6of12' data-ng-click='deletehour(hour)'>
+             <a class='button width-6of12' data-ng-click='deletehour(newhour)'>
                <span class='icon icon-trash'></span>
              </a>
             </div>
@@ -155,7 +155,7 @@
           </td>
         </tr>
         <tr data-ng-repeat='hour in hours|orderBy:["day","id"]'>
-          <td data-ng-class='{"background-red": $parent.editHour==hour.id}' data-ng-click='$parent.editHour=hour.id;$parent.newhour=hour'>
+          <td data-ng-class='{"background-red": $parent.newhour.id==hour.id && $parent.edithour}' data-ng-click='$parent.edithour=true;$parent.newhour=hour'>
            <div class='label float-right background-blue' data-ng-if='hour.hours'>
              {{hour.hours}}
            </div>
