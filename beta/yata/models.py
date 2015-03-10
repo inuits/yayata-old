@@ -37,7 +37,10 @@ class Timesheet(models.Model):
     user = models.ForeignKey(User,blank=True,null=True)
     locked = models.BooleanField(default=False)
 
-    def get_max_days(self):
+    def first_day(self):
+        return calendar.weekday(self.year,self.month,1)
+
+    def max_days(self):
         return calendar.monthrange(self.year,self.month)[1]
 
     def __unicode__(self):
@@ -62,7 +65,7 @@ class Hour(models.Model):
     mistaken = models.BooleanField(default=False)
 
     def clean(self):
-        if self.day > 31 or self.day < 1:
+        if self.day > self.timesheet.max_days() or self.day < 1:
             self.day = 1
             self.mistaken = True
 

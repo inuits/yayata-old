@@ -38,7 +38,7 @@ class TimesheetSerializer(serializers.ModelSerializer):
                 'company', 'company_name',
                 'group', 'group_name',
                 'user', 'user_name', 'locked',
-                'get_max_days')
+                'max_days', 'first_day')
 
 class HourSerializer(serializers.ModelSerializer):
     class Meta:
