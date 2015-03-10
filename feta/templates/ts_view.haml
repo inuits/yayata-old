@@ -105,7 +105,8 @@
              {{hour.hours200}}
            .label.float-right.background-green{'data-ng-if': 'hour.hourstravel'}
              {{hour.hourstravel}}
-           .label.float-left.background-blue
+           .label.float-left{'data-ng-class': '{"background-blue": (timesheet.first_day+hour.day-1)%7 < 5, "background-red": (timesheet.first_day+hour.day-1)%7 > 4}'}
+             {{days[(timesheet.first_day+hour.day-1)%7]}}
              {{hour.day}}
            {{hour.task}}
         %tr

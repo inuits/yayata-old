@@ -168,7 +168,8 @@
            <div class='label float-right background-green' data-ng-if='hour.hourstravel'>
              {{hour.hourstravel}}
            </div>
-           <div class='label float-left background-blue'>
+           <div class='label float-left' data-ng-class='{"background-blue": (timesheet.first_day+hour.day-1)%7 < 5, "background-red": (timesheet.first_day+hour.day-1)%7 > 4}'>
+             {{days[(timesheet.first_day+hour.day-1)%7]}}
              {{hour.day}}
            </div>
            {{hour.task}}
