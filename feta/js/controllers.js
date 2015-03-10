@@ -97,6 +97,12 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
 }
 
 function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
+    $scope.edithour = false;
+
+    $scope.stopEditing = function() {
+        $scope.newhour.id = false;
+        $scope.edithour = false;
+    }
     $scope.newhour = {};
     Timesheet.get({'timesheetId': $routeParams.timesheetId},
             function(data){ $scope.timesheet = data; });
@@ -120,7 +126,8 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
     $scope.updatehour = function(hour){
         Hour.update(angular.extend({'tid': $scope.timesheet.id, 'hid': hour.id}, hour),
             function(data){
-              $scope.get_hours()
+              $scope.get_hours();
+              $scope.stopEditing();
             }
         );
     }
@@ -128,7 +135,8 @@ function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
         Hour.delete({timesheet: $scope.timesheet.id, hour: hour.id},
             function(data){
                 var idx = $scope.hours.indexOf(hour);
-                $scope.hours.splice(idx,1)
+                $scope.hours.splice(idx,1);
+                $scope.stopEditing();
             }
         );
     }
