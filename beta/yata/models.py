@@ -16,6 +16,9 @@ class Project(models.Model):
     short_name = models.CharField(max_length=5)
     name = models.CharField(max_length=30)
     customer = models.ForeignKey('Customer')
+    holiday = models.BooleanField(default=False)
+    oncall = models.BooleanField(default=False)
+    recup = models.BooleanField(default=False)
 
     def __unicode__(self):
         return "%s (%s)" % (self.name, self.customer.name)
