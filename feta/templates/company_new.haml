@@ -1,0 +1,30 @@
+.cell
+  %h1 New Company
+.cell.panel{'data-ng-repeat': 'message in errors.non_field_errors'}
+  .body
+    .col
+      .cell.color-red
+        %span.icon.icon-16.icon-warning-sign.color-red.float-left
+        {{message}}}
+.cell.panel
+  .body
+    %form
+      .cell
+        .col
+          .col.width-1of4
+            .cell
+              %label Name
+          .col.width-fill
+            .cell
+              %input.text.width-10of12{'data-ng-class': '{"invalid":errors.name}', 'data-ng-model': 'company.name'}
+        .col{'data-ng-if': 'errors.name'}
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              .label.background-red{'data-ng-repeat': 'message in errors.name'}
+                {{message}}
+        .col
+          .col.width-1of4
+          .col.width-fill
+            .cell
+              %input{'type': 'submit', 'class': 'btn btn-primary', 'data-ng-click': 'create()', 'value': 'Submit'}
