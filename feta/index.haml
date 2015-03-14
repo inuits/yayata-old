@@ -33,6 +33,19 @@
       .col
         .cell
           .col
+            .cell.menu
+              %ul.nav
+                %li
+                  %a{'href': '#/timesheets'} Timesheets
+                %li
+                  %a{'href': '#/companies'} Companies
+                %li
+                  %a{'href': '#/customers'} Customers
+                %li
+                  %a{'href': '#/projects'} Projects
+      .col
+        .cell
+          .col
             .cell.panel{'data-ng-repeat':'error in $root.errors', 'data-ng-show':'!hide'}
               .header.background-red
                 %a.icon.icon-16.icon-remove-sign.color-white.float-right{'data-ng-click':'hide=true'}
