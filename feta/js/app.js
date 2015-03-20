@@ -8,8 +8,9 @@ var KanBanModule = angular.module('Yata', ['YataServices', ,'ngRoute','ngCookies
          when('/timesheet/:timesheetId', {templateUrl: yataUrls['timesheet_view'], controller: TimesheetViewCtrl}).
          when('/login', {templateUrl: yataUrls['login_view'], controller: LoginCtrl}).
          when('/logout', {templateUrl: yataUrls['logout_view'], controller: LogoutCtrl}).
-         when('/timesheets', {templateUrl: yataUrls['timesheet_list'], controller: TimesheetListCtrl})
-         .otherwise({ redirectTo: '/timesheets' });
+         when('/timesheets', {templateUrl: yataUrls['timesheet_list'], controller: TimesheetListCtrl}).
+         when('/companies', {templateUrl: yataUrls['company_list'], controller: CompanyListCtrl}).
+         otherwise({ redirectTo: '/timesheets' });
  }])
 .run(function (api) {
       api.init();

@@ -8,6 +8,16 @@ Array.prototype.sum = function (prop) {
         return total
 }
 
+function CompanyListCtrl($scope, Company, $location){
+    var companies = Company.query({},
+        function(){
+            $scope.companies = companies;
+        }
+    );
+    $scope.open = function(data){
+        $location.path('/company/'+data)
+    }
+}
 function TimesheetListCtrl($scope, Timesheet, $location){
     var timesheet = Timesheet.query({},
         function(){
