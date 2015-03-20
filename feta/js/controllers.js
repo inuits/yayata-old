@@ -119,9 +119,9 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
     $scope.year = currentYear;
 }
 
-function CompanyViewCtrl($scope, $routeParams, Timesheet, Hour){
+function CompanyViewCtrl($scope, $routeParams, Company){
     Company.get({'companyId': $routeParams.companyId},
-            function(data){ $scope.company = data; });
+    function(data){ $scope.company = data; });
 }
 function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
     $scope.edithour = false;
