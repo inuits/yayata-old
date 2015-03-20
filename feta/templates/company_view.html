@@ -1,0 +1,51 @@
+<div class='cell'>
+  <h1>New Company</h1>
+</div>
+<div class='cell panel' data-ng-repeat='message in errors.non_field_errors'>
+  <div class='body'>
+    <div class='col'>
+      <div class='cell color-red'>
+        <span class='icon icon-16 icon-warning-sign color-red float-left'></span>
+        {{message}}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class='cell panel'>
+  <div class='body'>
+    <form>
+      <div class='cell'>
+        <div class='col'>
+          <div class='col width-1of4'>
+            <div class='cell'>
+              <label>Name</label>
+            </div>
+          </div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <input class='text width-10of12' data-ng-class='{"invalid":errors.name}' data-ng-model='company.name' />
+            </div>
+          </div>
+        </div>
+        <div class='col' data-ng-if='errors.name'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <div class='label background-red' data-ng-repeat='message in errors.name'>
+                {{message}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='col'>
+          <div class='col width-1of4'></div>
+          <div class='col width-fill'>
+            <div class='cell'>
+              <input class='btn btn-primary' data-ng-click='create()' type='submit' value='Submit' />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
