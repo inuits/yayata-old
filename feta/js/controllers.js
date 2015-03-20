@@ -18,6 +18,7 @@ function CompanyListCtrl($scope, Company, $location){
         $location.path('/company/'+data)
     }
 }
+
 function TimesheetListCtrl($scope, Timesheet, $location){
     var timesheet = Timesheet.query({},
         function(){
@@ -67,6 +68,18 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     };
 };
 
+function CompanyNewCtrl($scope, Company, $location){
+    $scope.create = function(){
+        Company.create($scope.company).$promise.then(
+            function(data){
+                $location.path('/company/'+data.id)
+            },
+            function(data){
+                $scope.errors=data.data;
+            }
+    )};
+}
+
 function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $location){
     var project = Project.query({}, function(){ $scope.projects = project; });
     var customer = Customer.query({}, function(){ $scope.customers = customer; });
@@ -106,6 +119,10 @@ function TimesheetNewCtrl($scope, Customer, Project, Timesheet, Company, $locati
     $scope.year = currentYear;
 }
 
+function CompanyViewCtrl($scope, $routeParams, Timesheet, Hour){
+    Company.get({'companyId': $routeParams.companyId},
+            function(data){ $scope.company = data; });
+}
 function TimesheetViewCtrl($scope, $routeParams, Timesheet, Hour){
     $scope.edithour = false;
     var days = {};
