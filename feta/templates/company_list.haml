@@ -1,0 +1,23 @@
+.cell
+  .col
+    .cell
+      %h1 Companies
+    .col
+      .cell
+        %a{class: 'button', href: '#/company/new'} New Company
+    .col
+      .cell
+        %table.horizontal-border.outline-header
+          %thead
+            %tr
+              %th #
+              %th Name
+          %tbody
+            %tr{'data-ng-repeat': 'company in companies'}
+              %td
+                {{company.id}}
+              %td
+                {{company.name}}
+              %td
+                %a.button.icon-button{'data-ng-click': 'open(company.id)'}
+                  %span.icon.icon-folder-open
