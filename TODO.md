@@ -15,6 +15,7 @@ TODO
 * Package the python dependencies for EL7
 * Write more tests
 * Document the API
+* Implement compagnies
 * ...
 
 
