@@ -7,4 +7,10 @@ yataUrls['timesheet_new'] = 'templates/ts_new.html';
 yataUrls['company_list'] = 'templates/company_list.html';
 yataUrls['company_new'] = 'templates/company_new.html';
 yataUrls['company_view'] = 'templates/company_view.html';
+yataUrls['customer_list'] = 'templates/customer_list.html';
+yataUrls['customer_new'] = 'templates/customer_new.html';
+yataUrls['customer_view'] = 'templates/customer_view.html';
+yataUrls['project_list'] = 'templates/project_list.html';
+yataUrls['project_new'] = 'templates/project_new.html';
+yataUrls['project_view'] = 'templates/project_view.html';
 
