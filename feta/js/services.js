@@ -43,7 +43,7 @@ factory('Project', function($resource){
 }).
 factory('Company', function($resource){
     return $resource(BetaApiUrl + 'companies/:companyId/', {}, {
-        query: {method:'GET', params:{companyId:''}, isArray:true},
+        query: {method:'GET', url:BetaApiUrl + 'companies/', isArray:true},
         get: {method:'GET', params:{companyId:''}},
         create: {method:'POST', isArray:false}
     });
