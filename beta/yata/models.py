@@ -30,6 +30,9 @@ class Company(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Companies"
+
 class Timesheet(models.Model):
     MONTH_CHOICES=[(x, calendar.month_name[x]) for x in xrange(1,12)]
     month = models.IntegerField(choices=MONTH_CHOICES)
