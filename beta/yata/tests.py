@@ -9,47 +9,20 @@ from rest_framework.authtoken.models import Token
 
 class YataTest(APITestCase):
     def copy_timesheet(self,ts):
-        return Timesheet.objects.create(user=ts.user, project=ts.project, month=ts.month, company=ts.company)
+        return Timesheet.objects.create(
+            user=ts.user, project=ts.project, year=ts.year, month=ts.month,
+            company=ts.company)
 
     def generate_timesheet(self,name):
         company = Company.objects.create(name="%s Int" % name.title())
         customer = Customer.objects.create(short_name=name[0:3].upper(), name="Customer %s" % name.title())
         project = Project.objects.create(name="Project %s" % name.title(), short_name="P%s" % name[0:2].upper(), customer=customer)
         user = User.objects.create(username="%s_user" % name)
-        return Timesheet.objects.create(user=user, project=project, month=date(2015,01,01), company=company)
+        return Timesheet.objects.create(user=user, project=project, month=01, year=2015, company=company)
 
     def get_token(self,user):
         return Token.objects.create(user=user)
 
-
-class TimesheetTestCase(YataTest):
-    def setUp(self):
-        company = Company.objects.create(name="Inuits")
-        customer = Customer.objects.create(short_name="ESQ", name="Esquimaux")
-        project = Project.objects.create(name="Project X", short_name="PX", customer=customer)
-        user = User.objects.create(username="tux")
-        Timesheet.objects.create(user=user, project=project, month=date(2015,01,01), company=company)
-
-    def test_timesheet_month_first_day_january(self):
-        '''Check that when changing the date it is set to the 1st of the month'''
-        ts = Timesheet.objects.get(id=1)
-        ts.month = date(2015,01,02)
-        ts.save()
-        self.assertEqual(ts.month, date(2015,01,01))
-
-    def test_timesheet_month_first_day_may(self):
-        '''This time the date should not be changed'''
-        ts = Timesheet.objects.get(id=1)
-        ts.month = date(2015,05,01)
-        ts.save()
-        self.assertEqual(ts.month, date(2015,05,01))
-
-    def test_timesheet_month_first_day_no_change_to_date(self):
-        '''Another test with february'''
-        ts = Timesheet.objects.get(id=1)
-        ts.month = date(2015,02,06)
-        ts.save()
-        self.assertEqual(ts.month, date(2015,02,01))
 
 class ACLTimesheetTestCase(YataTest):
     def setUp(self):
@@ -144,14 +117,14 @@ class HourTestCase(YataTest):
         '''test that ts1 can book one hour'''
         self.client.force_authenticate(user=self.ts1.user,token=self.get_token(self.ts1.user))
         url = reverse('hour-list', args=[self.ts1.id])
-        response = self.client.post(url, {'hours': 1, 'day': date.today()})
+        response = self.client.post(url, {'hours': 1, 'day': date.today().day})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_ts2_permission(self):
         '''test that ts2 can not book one hour on ts1'''
         self.client.force_authenticate(user=self.ts2.user,token=self.get_token(self.ts2.user))
         url = reverse('hour-list', args=[self.ts1.id])
-        response = self.client.post(url, {'hours': 1, 'day': date.today()})
+        response = self.client.post(url, {'hours': 1, 'day': date.today().day})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
