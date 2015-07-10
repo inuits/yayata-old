@@ -1,5 +1,6 @@
 # Yet Another YATA
 
+[![Build Status](https://travis-ci.org/Inuits/yayata.svg?branch=master)](https://travis-ci.org/Inuits/yayata)
 
 This repositories contains Frontends and Backends of a timesheet application
 used internally at Inuits by consultants to report their time.
