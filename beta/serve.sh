@@ -1,3 +1,3 @@
 #!/bin/bash
 source bin/activate
-python manage.py runserver
+python manage.py runserver --insecure
