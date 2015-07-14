@@ -46,13 +46,13 @@
       .col
         .cell
           .col
-            .cell.panel{'data-ng-repeat':'error in $root.errors', 'data-ng-show':'!hide'}
-              .header.background-red
+            .cell.panel{'data-ng-repeat':'msg in $root.messages', 'data-ng-show':'!hide'}
+              .header{'data-ng-class': '{"background-red": msg.level == "error"}'}
                 %a.icon.icon-16.icon-remove-sign.color-white.float-right{'data-ng-click':'hide=true'}
-                Error {{error.code}}
-              .body{'data-ng-if':'error.message'}
+                Error {{msg.code}}
+              .body{'data-ng-if':'msg.message'}
                 .col
                   .cell
                     %span.icon.icon-16.icon-warning-sign.color-red.float-left
-                    {{error.message}}
+                    {{msg.message}}
       .col{'data-ng-view':''}

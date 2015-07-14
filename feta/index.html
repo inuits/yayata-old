@@ -66,16 +66,16 @@
       <div class='col'>
         <div class='cell'>
           <div class='col'>
-            <div class='cell panel' data-ng-repeat='error in $root.errors' data-ng-show='!hide'>
-              <div class='header background-red'>
+            <div class='cell panel' data-ng-repeat='msg in $root.messages' data-ng-show='!hide'>
+              <div class='header' data-ng-class='{"background-red": msg.level == "error"}'>
                 <a class='icon icon-16 icon-remove-sign color-white float-right' data-ng-click='hide=true'></a>
-                Error {{error.code}}
+                Error {{msg.code}}
               </div>
-              <div class='body' data-ng-if='error.message'>
+              <div class='body' data-ng-if='msg.message'>
                 <div class='col'>
                   <div class='cell'>
                     <span class='icon icon-16 icon-warning-sign color-red float-left'></span>
-                    {{error.message}}
+                    {{msg.message}}
                   </div>
                 </div>
               </div>

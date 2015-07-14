@@ -17,8 +17,8 @@ factory('httpInterceptor', function ($q, $window, $location, $cookieStore, $root
                 $location.url('/login');
             }
             if ('detail' in response.data){
-                $rootScope.errors.push(
-                        {code: response.status, message: response.data.detail}
+                $rootScope.messages.push(
+                        {'code': response.status, 'message': response.data.detail, 'level': 'error'}
                         )
             };
             return $q.reject(response);

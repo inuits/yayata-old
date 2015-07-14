@@ -43,6 +43,9 @@ function LogoutCtrl($scope, $location, api, $cookieStore) {
     $location.path('/login');
 };
 
+function Filter403401(value){
+    return value['code'] != 403 && value['code'] != 401
+}
 
 function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     $scope.use_cookies = false;
@@ -51,7 +54,7 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     $scope.login = function(){
         $scope.submitted = true;
         login_trial = Login.login({'username': $scope.username, 'password': $scope.password}).$promise.then(function(data) {
-            $rootScope.errors = [];
+            $rootScope.messages = $rootScope.messages.filter(Filter403401);
             $scope.submitted = false;
             api.init(data['token']);
             if ($scope.use_cookies){
@@ -68,11 +71,12 @@ function LoginCtrl($rootScope, $scope, Login, Me, api, $cookies,$location) {
     };
 };
 
-function CompanyNewCtrl($scope, Company, $location){
+function CompanyNewCtrl($scope, Company, $location, $rootScope){
     $scope.create = function(){
         Company.create($scope.company).$promise.then(
             function(data){
-                $location.path('/company/'+data.id)
+                $rootScope.messages.push({'code': 600, 'level': 'info', 'message': 'Company created!'})
+                $location.path('/companies')
             },
             function(data){
                 $scope.errors=data.data;
